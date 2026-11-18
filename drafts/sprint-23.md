@@ -1,7 +1,7 @@
 # Sprint 23 — Draft tickets
 
 **Sprint:** Sprint 23 (id 5841), Nov 23 – Dec 7, 2026
-**Status:** DRAFT. Nothing below has been created in Jira yet.
+**Status:** A2–A6 created in Sprint 23 on 2026-11-17 (ML-800 – ML-804). A1 and A7 are still drafts.
 **Source:** follow-ups found in Sprint 21/22 tickets: "out of scope" and "follow-up" notes, spike outcomes, and blocked work.
 
 Legend: ✅ approve as-is · ✏️ edit · ❌ drop
@@ -37,7 +37,7 @@ Legend: ✅ approve as-is · ✏️ edit · ❌ drop
 
 ---
 
-### A2. [mt-gorilla] Point prod-us at the US-region distance calculation lambdas
+### A2. ✅ **CREATED ML-800** — [mt-gorilla] Point prod-us at the US-region distance calculation lambdas
 - **Type:** Task · **Labels:** `Scope3` · **Assignee:** Brian Hirst
 - **Follows:** ML-763 (deploy distance calc to US, live), ML-762 (MG IAM for renamed lambdas), ML-758 (parameter store names)
 
@@ -56,7 +56,7 @@ ML-763 deploys the distance calculation stack to the US region on the live accou
 
 ---
 
-### A3. [axolotl] ef_match: fix the v-prefixed prompt version defaults
+### A3. ✅ **CREATED ML-801** — [axolotl] ef_match: fix the v-prefixed prompt version defaults
 - **Type:** Bug · **Labels:** `Platform`, `Scope3` · **Assignee:** Rohit Kumar
 - **Follows:** ML-721. It was closed as investigated, but Rohit's comment says the defaults are still in the code.
 
@@ -73,7 +73,7 @@ Make `LocalPromptTemplate` accept both forms by stripping a leading `v`. This is
 
 ---
 
-### A4. [Axolotl][SPIKE] Find the cause of empty Bedrock responses
+### A4. ✅ **CREATED ML-802** — [Axolotl][SPIKE] Find the cause of empty Bedrock responses
 - **Type:** Story · **Labels:** `Platform`, `research` · **Assignee:** Rohit Kumar
 - **Follows:** ML-716 and ML-720 both list the cause as out of scope. ML-315 (Apr) checked the same symptom in EPD.
 
@@ -93,7 +93,7 @@ Make `LocalPromptTemplate` accept both forms by stripping a leading `v`. This is
 
 ---
 
-### A5. [harness] Answer every pending tool call when a HIL approval is auto-cancelled
+### A5. ✅ **CREATED ML-803** — [harness] Answer every pending tool call when a HIL approval is auto-cancelled
 - **Type:** Story · **Labels:** `Platform`, `enhancement` · **Assignee:** Sagar Thacker
 - **Follows:** ML-770, which fixed this in mt-gorilla's default engine. It noted that "the native engine has a related gap, out of scope because that engine is being reworked." Related backlog item: ML-617.
 
@@ -110,7 +110,7 @@ The harness, and any engine it still uses, answers every unanswered tool call in
 
 ---
 
-### A6. [pptxgen] Run the unit tests in CI on pull requests
+### A6. ✅ **CREATED ML-804** — [pptxgen] Run the unit tests in CI on pull requests
 - **Type:** Story · **Labels:** `Site_Based`, `chore` · **Assignee:** Ram Gandikota
 - **Follows:** ML-745 (unit tests) and ML-747 (deploy workflows)
 
