@@ -1,7 +1,7 @@
 # Sprint 23 — Draft tickets
 
 **Sprint:** Sprint 23 (id 5841), Nov 23 – Dec 7, 2026
-**Status:** A2–A6 created in Sprint 23 on 2026-11-17 (ML-800 – ML-804). A1a/A1b (LCA, rewritten for the harness), A7 are still drafts. A8/A9 were created on 2026-11-20 as ML-807/ML-808. More Sprint 23 drafts are in `drafts/sprint-23-gaps.md`.
+**Status:** A2–A6 created in Sprint 23 on 2026-11-17 (ML-800 – ML-804). A1a/A1b (LCA, rewritten for the harness), A7 are still drafts. A8/A9/A10 were created on 2026-11-20 as ML-807/ML-808/ML-812. More Sprint 23 drafts are in `drafts/sprint-23-gaps.md`.
 **Source:** follow-ups found in Sprint 21/22 tickets: "out of scope" and "follow-up" notes, spike outcomes, and blocked work.
 
 Legend: ✅ approve as-is · ✏️ edit · ❌ drop
@@ -225,6 +225,38 @@ The harness, and any engine it still uses, answers every unanswered tool call in
 * Follow-up POC tickets.
 
 **Timebox:** 4 days.
+
+---
+
+### A10. ✅ **CREATED ML-812** — [harness][Bonobo][SPIKE] Get Insights output from the harness into Bonobo
+- **Type:** Story · **Labels:** `Platform`, `research` · **Assignee:** Sagar Thacker, with Rohit Kumar consulted (he has done most of the Bonobo work)
+- **Context:** Brian, 2026-11-20: start targeting incorporating Insights output from the harness into Bonobo. It will take several steps, and this spike plans them. Related: R3 (Traci in Insights over Scope 1–3 data, in `drafts/sprint-23-gaps.md`), ML-791, ML-792, ML-809, ML-810.
+- ✏️ Sagar already has H1, ML-790, ML-791, ML-792, ML-803 and ML-810 this sprint. This may have to start late in the sprint or carry over.
+
+**Goal:** Decide how the Insights output a harness agent produces (answers, charts, generated files and reports) gets into Bonobo, and break that into step-by-step tickets that follow the harness milestones.
+
+**Context:** Bonobo runs our workflows (complyrag gap assessment, EPD, climate risk, AI summary, EF recommendations). It has request contracts (ML-643), workflow configs (ML-690), a notification service (ML-691) and Langfuse tracing. The harness is the new agent layer. Today its outputs live only in its own session store: files in S3 per session, versioned, plus threads in Postgres. The harness meeting agreed that bulk runs stay as workflows, so Bonobo stays, and the two need a defined hand-off.
+
+**Questions to answer:**
+* **What output, specifically?** Chat answers, charts (PNG now; HTML and dashboards later per the 4 visualization levels), generated files (docx, xlsx, HTML/PDF reports), and the queries and sources behind them. Which of these does Insights need Bonobo to hold or act on?
+* **What does Bonobo do with it?** Store it as the system of record, serve it to the Insights UI, trigger a workflow (e.g. scheduled regeneration of a report, notifications), or a combination?
+* **Contract:** what does a harness → Bonobo request look like, following Bonobo's existing request-contract and config patterns? Who owns the schema?
+* **Sync or async:** does the agent call Bonobo directly in a run, or hand off through a background job or event? Is the existing event bus (ML-761) an option?
+* **Storage and tenancy:** copy from harness S3 into Bonobo, or reference it? How do tenant isolation, retention and versioning carry over?
+* **Tracing:** how is a harness trace linked to the Bonobo workflow trace in Langfuse (tenant, service, user)?
+
+**Options to compare:**
+1. **Bonobo API:** the harness pushes finished outputs to a new Bonobo endpoint, and Bonobo is the system of record.
+2. **Bonobo as an MCP server/tool:** the agent calls tools such as "save insight" or "run workflow" when it decides to, behind approvals.
+3. **Events:** the harness emits an "insight produced" event and Bonobo consumes it.
+4. **Shared storage:** Bonobo indexes the harness S3 outputs in place.
+
+**Outcome:**
+* A recommended option, with a sketch of the contract and a data-flow diagram.
+* A sequence of follow-up tickets, each tied to the harness milestone it needs: local, wip (ML-809), auth (ML-810), Snowflake MCP (ML-791).
+* Agreement with Rohit on the Bonobo side.
+
+**Timebox:** 3 days.
 
 ---
 

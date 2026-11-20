@@ -36,6 +36,8 @@ When those four are done, anyone can run it locally and contribute, e.g. to the 
 - Deployment workflows and infra for wip **(no ticket)**. Brian usually takes infra tasks.
 - Move the code into the new repo and share it **(no ticket)**
 
+**Insights output → Bonobo** (Brian, 2026-11-20): start targeting getting the Insights output from the harness into Bonobo. This is a multi-step effort, beginning with the Sprint 23 spike **ML-812** (Sagar, with Rohit consulted).
+
 **Communication:** Sagar will share a write-up of next steps listing what he needs from front end, Data Ops and back end. He offered to join their planning sessions.
 
 ## Asks of other teams
