@@ -1,7 +1,7 @@
 # Sprint 23 — Draft tickets
 
 **Sprint:** Sprint 23 (id 5841), Nov 23 – Dec 7, 2026
-**Status:** all section A drafts are created in Sprint 23. A2–A6 = ML-800–804 (2026-11-17). A8 = ML-807, A9 = ML-808, A10 = ML-812, A1a = ML-818, A7 = ML-819, A11 = ML-820, A1b = ML-824 (2026-11-20), to be polished in sprint planning. More are in `drafts/sprint-23-gaps.md`.
+**Status:** all section A drafts are created in Sprint 23. A2–A6 = ML-800–804 (2026-11-17). A8 = ML-807, A9 = ML-808, A10 = ML-812, A1a = ML-818, A7 = ML-819, A11 = ML-820, A1b = ML-824 (2026-11-20), to be polished in sprint planning. **2026-11-20 consolidation:** ML-808 closed as a duplicate of Sagar's ML-813; ML-818, ML-824 (and ML-815) are in Sprint 24; ML-824 rewritten to wrap ML-815's skill. More are in `drafts/sprint-23-gaps.md`.
 **Source:** follow-ups found in Sprint 21/22 tickets: "out of scope" and "follow-up" notes, spike outcomes, and blocked work.
 
 Legend: ✅ approve as-is · ✏️ edit · ❌ drop
@@ -10,7 +10,7 @@ Legend: ✅ approve as-is · ✏️ edit · ❌ drop
 
 ## A. Ready to draft now
 
-### A1a. ✅ **CREATED ML-818** — [harness][LCA] Set up the LCA agent on the harness
+### A1a. ✅ **CREATED ML-818** (Sprint 24) — [harness][LCA] Set up the LCA agent on the harness
 - **Type:** Story · **Labels:** `Platform`, `Supplier_Portal`, `enhancement` · **Assignee:** Rohit Kumar (moved from Victor 2026-11-20; Sagar supports on the harness side)
 - **Follows:** ML-640 (deepagents skeleton in mountain-gorilla, REVIEW since Sprint 20), epic ML-639. **Decision (2026-11-17):** LCA is built on the harness, not on the ML-640 skeleton.
 
@@ -38,9 +38,9 @@ LCA is defined as a harness agent (`agents/lca/` with `agent.yaml` and prompts),
 
 ---
 
-### A1b. ✅ **CREATED ML-824** — [LCA] Stage 1: BOM column mapping, validation and vision extraction
+### A1b. ✅ **CREATED ML-824** (Sprint 24) — [harness][LCA] Stage 1: wrap the BOM-cleaning skill into the LCA agent, plus validation and vision extraction
 - **Type:** Story · **Labels:** `Supplier_Portal`, `enhancement` · **Assignee:** Rohit Kumar (moved from Victor 2026-11-20)
-- **Blocked by:** A1a, and A9 (ML-808). ✏️ Rewrite this ticket with ML-808's chosen approach and schema before creating it. It's planned for Sprint 24.
+- **Blocked by:** ML-818 and ML-815 (which follows ML-813 → ML-814). Rewritten 2026-11-20 after ML-808 was closed.
 
 ## Problem
 
@@ -199,7 +199,7 @@ The harness, and any engine it still uses, answers every unanswered tool call in
 
 ---
 
-### A9. ✅ **CREATED ML-808** — [LCA][SPIKE] BOM ingestion: turn unstructured BOMs into a structured product tree
+### A9. ❌ **CLOSED ML-808** (duplicate of ML-813, 2026-11-20) — [LCA][SPIKE] BOM ingestion: turn unstructured BOMs into a structured product tree
 - **Type:** Story · **Labels:** `Supplier_Portal`, `research` · **Assignee:** Rohit Kumar
 - **Context:** The POC has to start from a customer BOM. Plan: `projects/lca/q4-plan.md`. This overlaps A1b (stage 1 BOM mapping, validation and vision extraction). A9 decides the approach and A1b builds it.
 

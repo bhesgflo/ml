@@ -4,7 +4,7 @@
 
 **What it is:** the **manual** method the team used for EnerSys Phase 1. It produced a cradle-to-grave carbon footprint for one product: the **48V 4PzS500** motive lead-acid battery (Hawker Perfect Plus / PzS family), made at the **Bielsko, Poland** site. Each step lists its required outputs, method, formula or audit evidence, and how far AI could do it. **This is the process the LCA POC automates.** Methodology: **JRC** rules for industrial-battery carbon footprints, the Circular Footprint Formula (CFF), and Ecoinvent EFs. Impact category: climate change (kg CO₂e).
 
-**Status for ML (Brian, 2026-11-20):** Sprint 23 LCA work stays as-is (ML-807, ML-808). This document is input for a **next-sprint (Sprint 24) research project**.
+**Status for ML (Brian, 2026-11-20):** Sprint 23 LCA work is ML-807 plus the BOM track ML-813 → ML-814 (ML-808 closed as a duplicate of ML-813). This document is input for a **next-sprint (Sprint 24) research project**.
 
 ---
 
@@ -83,7 +83,7 @@ Reconcile the BOM with the declared finished-battery mass, plus losses and waste
 ---
 
 ## Takeaways for ML (input to Sprint 24 research)
-- **It already answers most of ML-807's data-point questions** for one product: the boundary is effectively cradle-to-grave with JRC EoL, and the data inventory and sources are listed. ML-807/ML-808 can use it as the reference case.
+- **It already answers most of ML-807's data-point questions** for one product: the boundary is effectively cradle-to-grave with JRC EoL, and the data inventory and sources are listed. ML-807 and ML-813/ML-814 can use it as the reference case.
 - **Where automation pays off:** BOM restructuring (PC → kg, sub-assembly dedup, composition), **process assignment → EF selection** (reuse `ef_match`), and repeatable calculations (FU, energy allocation, tkm, EoL template, mass balance, DQR).
 - **Where humans or the client stay in the loop:** weights that need photos, % scrap per line, packaging photos, supplier and distance data, and composition when it's undocumented. The tool should **ask for these and record the evidence** for the audit.
 - **Every number needs an audit trail.** TeR/GeR and primary/secondary/assumption tagging are required per line, so the data model must carry source and evidence for each line.

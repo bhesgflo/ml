@@ -16,7 +16,7 @@ Q4 ends Dec 31. After Sprint 23 (Nov 23 – Dec 7), about **2 sprints are left**
 | 4 | AI responses in first person, not "the undertaking" | Compliance | Must | XS | In progress | Ram | ML-787 |
 | 5 | Automatic EF matching for deterministic flow | Scope 3 | Must | M | In progress | Victor | epic ML-712 (staghorn-coral) |
 | 6 | Scope 3 Claude Skills | Scope 3 | Must | S | In progress | Maxi | **none** in ML (Resources: BE, Product) |
-| 7 | LCA Enersys POC | Insights/Data Layer | Must | — | Not started | Rohit | epic ML-639; ML-807, ML-808; A1a/A1b drafts |
+| 7 | LCA Enersys POC | Insights/Data Layer | Must | — | Not started | Rohit | epic ML-639; ML-807, ML-813–815, ML-818, ML-824 |
 | 8 | Kion onboarding | Scopes 1 & 2 | Must | S | In progress | Chethan Patharla | epic ML-585 (unassigned) |
 | 9 | Migrate Barnes Industrial to new Abbyy process | Scopes 1 & 2 | Must | M | In progress | Chethan Patharla | **none** (ML-206 is an old Barnes bug) |
 | 10 | Updated Traci in Insights, connected to Scope 1, 2 & 3 data | Insights/Data Layer | Should | — | Not started | Sagar | **none** |
@@ -57,7 +57,7 @@ Q4 ends Dec 31. After Sprint 23 (Nov 23 – Dec 7), about **2 sprints are left**
 - **Blocking UX decision:** chat per measurement, or always on? Sagar needs this to build the agent. Poppy and Colby are designing the flow.
 - Effort is mostly FE and ML, with little BE. Final sizing isn't done. Hirschmann Auto offered to help build it.
 
-**7. LCA Enersys POC** (Rohit, Must). Value: a proof of concept for product-level LCA footprints. The page is otherwise blank. **Brian confirmed on 2026-11-20 that Rohit owns it, with a working POC due by the end of Q4.** The plan is in [`projects/lca/q4-plan.md`](../projects/lca/q4-plan.md), and the Sprint 23 spikes are **ML-807** (data points) and **ML-808** (BOM).
+**7. LCA Enersys POC** (Rohit, Must). Value: a proof of concept for product-level LCA footprints. The page is otherwise blank. **Brian confirmed on 2026-11-20 that Rohit owns it, with a working POC due by the end of Q4.** The plan is in [`projects/lca/q4-plan.md`](../projects/lca/q4-plan.md), and the tickets are **ML-807** (data points) and the BOM track **ML-813 → ML-814** in Sprint 23, then **ML-815, ML-818, ML-824** in Sprint 24. ML-808 was closed as a duplicate of ML-813 on 2026-11-20.
 
 **10. Updated Traci in Insights** (Sagar, Should). Value: ask Traci in Insights and get answers drawn from Scope 1, 2 and 3 data together. The page is blank. In harness terms this needs the Snowflake MCP (ML-791), and the Data Ops Snowflake MCP/auth work.
 

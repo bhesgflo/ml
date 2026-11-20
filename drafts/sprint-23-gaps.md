@@ -231,6 +231,6 @@ A user in Insights asks Traci a question and gets an answer drawn from their Sco
 |---|---|
 | **Scope 3 Claude Skills** (Must, Maxi) | Owned by Maxi, with resources BE and Product only, not ML. Draft one if ML is expected to build the skills. |
 | **Traci Ingestion Assistant V2** (Should, L, Sagar) | Has epic ML-631. The Notion page is blank, so the scope needs defining first. More likely Q1. |
-| **LCA Enersys POC** (Must) | Covered by ML-807, ML-808 and A1a/A1b (Rohit). Plan in `projects/lca/q4-plan.md`. |
+| **LCA Enersys POC** (Must) | Covered by ML-807, ML-813–815, ML-818 and ML-824 (Rohit). Plan in `projects/lca/q4-plan.md`. |
 | **Fiscal-year implementation** | Waits on the ML-786 spike outcome (Sprint 23 draft, section B). |
 | **Snowflake MCP auth, Traci secret keys** | Data Ops (Juan) and Maxi, outside the ML project. |
