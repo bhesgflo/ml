@@ -23,9 +23,9 @@ Derived from Sprint 21 (Oct 26 – Nov 8, 2026) and Sprint 22 (Nov 9 – 23, 202
 | Name | Account ID | Primary focus (per Brian) | Secondary / observed |
 |---|---|---|---|
 | Sagar Thacker | `712020:3043867d-69ba-44f2-b6b6-e54dca340b7c` | **Harness** | Scope 3, Compliance (mt-gorilla, Traci, distance calc, Abbyy) |
-| Victor Zhang | `712020:64377384-3b02-4f8b-96dd-4c0f595e34c8` | **LCA** | staghorn-coral (S3 Deterministic Flow) in S21/S22 |
+| Victor Zhang | `712020:64377384-3b02-4f8b-96dd-4c0f595e34c8` | **staghorn-coral** (S3 Deterministic Flow, EF matching) | LCA until 2026-11-20 (ML-640) |
 | Ram Gandikota | `712020:6c4e19ac-306b-4617-b192-49f7d2b0b1db` | **Compliance** (Complyrag) | Traci bugs, Vaquita/pptxgen |
-| Rohit Kumar | `712020:9832ba19-d061-4931-bebf-8fdaddd3c5fd` | **Scope 3** | Axolotl/Bonobo platform, EPD/Supplier, model upgrades, docs |
+| Rohit Kumar | `712020:9832ba19-d061-4931-bebf-8fdaddd3c5fd` | **Scope 3**, **LCA** (from 2026-11-20, Enersys POC) | Axolotl/Bonobo platform, EPD/Supplier, model upgrades, docs |
 | Brian Hirst | `712020:fefe2da8-4fbc-4d33-8050-f91badcea641` | Manager. Takes infra/Terraform/IAM Tasks himself | |
 
 **Assignment rule:** assign each ticket to the primary owner for its area. People do work outside their area, so for **follow-on / next-phase work, assign whoever did the prior ticket** (check the parent or predecessor ticket's assignee).

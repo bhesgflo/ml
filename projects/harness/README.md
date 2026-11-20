@@ -15,7 +15,7 @@ The general-purpose agent harness Sagar is building. It is meant to **replace mt
 |---|---|
 | Mountain Gorilla / Montgarrita / Martin Garrila | `mt-gorilla`, the current agent backend |
 | Forest Elephant / "A elephant" | front-end app whose assistant UI the harness reuses |
-| Panda / Red Panda | the harness project (repo, UI library and backend). "orangutan red panda" was said about where the UI could live. Confirm repo names with Franco |
+| Panda / Red Panda | the harness project. The repo is `panda` (ML-791 cites "the panda repo"). "orangutan red panda" was said about where the UI could live; confirm the front-end repo names with Franco |
 | Tracy | Traci |
 | Bono | Bonobo |
 | LAN fuse / Lancers | Langfuse |

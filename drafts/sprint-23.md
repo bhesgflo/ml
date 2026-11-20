@@ -1,7 +1,7 @@
 # Sprint 23 — Draft tickets
 
 **Sprint:** Sprint 23 (id 5841), Nov 23 – Dec 7, 2026
-**Status:** A2–A6 created in Sprint 23 on 2026-11-17 (ML-800 – ML-804). A1 and A7 are still drafts.
+**Status:** A2–A6 created in Sprint 23 on 2026-11-17 (ML-800 – ML-804). A1a/A1b (LCA, rewritten for the harness), A7 are still drafts. A8/A9 were created on 2026-11-20 as ML-807/ML-808. More Sprint 23 drafts are in `drafts/sprint-23-gaps.md`.
 **Source:** follow-ups found in Sprint 21/22 tickets: "out of scope" and "follow-up" notes, spike outcomes, and blocked work.
 
 Legend: ✅ approve as-is · ✏️ edit · ❌ drop
@@ -10,30 +10,58 @@ Legend: ✅ approve as-is · ✏️ edit · ❌ drop
 
 ## A. Ready to draft now
 
-### A1. [LCA] Stage 1: BOM column mapping, validation and vision extraction
-- **Type:** Story · **Labels:** `Supplier_Portal`, `enhancement` (copied from ML-640) · **Assignee:** Victor Zhang
-- **Follows:** ML-640 (skeleton, REVIEW since Sprint 20), epic ML-639
-- ⚠️ **Decide first:** ML-640 builds LCA in mountain-gorilla on deepagents. Sagar's new harness is now the target for agents (ML-792 moves SQL Analyst onto it). Should Stage 1 go on the ML-640 skeleton or on the harness?
+### A1a. [harness][LCA] Set up the LCA agent on the harness
+- **Type:** Story · **Labels:** `Platform`, `Supplier_Portal`, `enhancement` · **Assignee:** Rohit Kumar (moved from Victor 2026-11-20; Sagar supports on the harness side)
+- **Follows:** ML-640 (deepagents skeleton in mountain-gorilla, REVIEW since Sprint 20), epic ML-639. **Decision (2026-11-17):** LCA is built on the harness, not on the ML-640 skeleton.
 
-**Goal:** Add the first real domain stage to the LCA agent: map a customer BOM's columns, validate them, and extract BOM data from images or PDFs.
+## Problem
 
-**Context:** ML-640 built the LCA agent skeleton on deepagents in mountain-gorilla (`app/agents/lca/`, branch `st/feature/ml-640` off `feature/lca-intelligence`). It covers thread create/resume/streaming, a HITL round-trip and the S3 thread file backend. That ticket left the real stage-1 logic for "the next milestone".
+The LCA agent skeleton (ML-640) was built in mountain-gorilla on deepagents. Agents are now moving to the harness: ML-792 moves SQL Analyst there to get its threads, approvals, step history and tracing. Building LCA stages on the ML-640 skeleton would mean migrating it later.
 
-**Scope:**
-* BOM column mapping: map uploaded BOM columns to the LCA schema. Ask the user through HITL when a mapping is uncertain.
-* Validation: check required columns, units and types. Report problems to the user rather than failing silently.
-* Vision extraction: pull BOM tables out of image or PDF uploads into the same schema.
-* Run each step through the existing HITL and S3 thread backend from ML-640.
+## Goal
 
-**Acceptance criteria:**
-* A reference BOM (CSV/XLSX) goes through mapping and validation end to end in wip.
-* A reference BOM image or PDF is extracted into the same schema.
-* An uncertain column mapping triggers a HITL approval.
+LCA is defined as a harness agent (`agents/lca/` with `agent.yaml` and prompts), with the same baseline ML-640 proved out. Stage 1 logic can then be added directly on the harness.
+
+## Acceptance criteria
+
+* The LCA agent is defined in `agents/lca/` and runs in wip through the harness.
+* A thread can be created, resumed and streamed.
+* A user can upload a file to a thread, and the agent can read it. This replaces ML-640's S3 thread backend.
+* A smoke-test tool that needs approval round-trips through the harness approval rules (approve and reject).
+* Runs are traced in Langfuse.
+* Anything from ML-640 worth keeping is listed in this ticket, e.g. the `routes_run.py` stale-run fix and the `env.prod-us.json` inference-profile fix. Those may matter outside LCA.
+
+## Still open
+
+* How does an agent add custom (non-MCP) tools on the harness? Stage 1 needs them for column mapping, validation and vision extraction. Check with Sagar against the ML-714 tech design.
+* What happens to ML-640 and the `feature/lca-intelligence` branch: close without merging, or merge only the non-LCA fixes?
+
+---
+
+### A1b. [LCA] Stage 1: BOM column mapping, validation and vision extraction
+- **Type:** Story · **Labels:** `Supplier_Portal`, `enhancement` · **Assignee:** Rohit Kumar (moved from Victor 2026-11-20)
+- **Blocked by:** A1a, and A9 (ML-808). ✏️ Rewrite this ticket with ML-808's chosen approach and schema before creating it. It's planned for Sprint 24.
+
+## Problem
+
+The LCA agent has no domain logic yet. Stage 1, getting a customer's BOM into a clean, validated LCA schema, is the first of the 8 stages and everything after it depends on it.
+
+## Goal
+
+The LCA agent on the harness takes a customer BOM (CSV, XLSX, image or PDF), maps its columns to the LCA schema, validates the result, and asks the user when it isn't sure.
+
+## Acceptance criteria
+
+* **Column mapping:** the uploaded BOM's columns are mapped to the LCA schema. An uncertain mapping goes to the user for approval through the harness approval rules.
+* **Validation:** required columns, units and types are checked. Problems are reported to the user in the thread, never dropped silently.
+* **Vision extraction:** BOM tables in images or PDFs are extracted into the same schema.
+* A reference BOM in CSV/XLSX and one as an image or PDF each go through stage 1 end to end in wip.
 * Runs are traced in Langfuse.
 
-**Out of scope:**
+## Out of scope
+
 * Stages 2–8.
-* Frontend (forestelephant) Tool-UI cards.
+* Frontend Tool-UI cards.
 
 ---
 
@@ -145,13 +173,68 @@ The harness, and any engine it still uses, answers every unanswered tool call in
 
 ---
 
+### A8. ✅ **CREATED ML-807** — [LCA][SPIKE] Enersys LCA: review the key data points and what Enersys can supply
+- **Type:** Story · **Labels:** `Supplier_Portal`, `research` · **Assignee:** Rohit Kumar
+- **Context:** Q4 roadmap row "LCA Enersys POC" (Must Have, owner Rohit). Enersys is about to start building product LCAs. Plan: `projects/lca/q4-plan.md`. Related: epic ML-639, A1a/A1b, and ML-551 (an earlier Enersys ingestion bug).
+
+**Goal:** Decide what data a product LCA for Enersys needs, which of it Enersys can supply, and what the Q4 POC will cover.
+
+**Context:** We have an LCA agent design (ML-639, 8 stages) and a harness skeleton plan (A1a/A1b). We haven't yet checked them against a real customer's data. Enersys makes batteries, so materials such as lead, lithium, acid and plastic casings, recycled content and end-of-life will matter.
+
+**Questions to answer:**
+* Which **key data points** are needed, and is each required, optional or defaultable? At least: functional unit, system boundary, BOM (components, materials, mass), material composition and recycled content, supplier and origin, manufacturing energy per unit, transport, packaging, use phase, end of life, and emission factor / LCI source.
+* **System boundary for the POC:** cradle-to-gate or cradle-to-grave? Which standard do we align to (ISO 14067 / GHG Protocol Product Standard)?
+* Does Enersys need anything regulatory, e.g. battery carbon-footprint declarations under the EU Battery Regulation? Confirm with CS and Product.
+* For each data point, **where does it come from at Enersys** (ERP, PLM, supplier declarations, spreadsheets), and how complete is it?
+* Which emission factor sources do we have for these materials, and can the existing EF matching (`ef_match`, staghorn-coral) be reused?
+* Which **one or two Enersys products** should the POC target?
+
+**Outcome:**
+* A data-point inventory table (data point · required? · Enersys source · availability · fallback), added to ML-639.
+* A proposed POC scope: products, boundary and output.
+* Follow-up POC tickets.
+* Agreed with Brian by the Sprint 23 checkpoint (see the plan).
+
+**Timebox:** 3 days.
+
+---
+
+### A9. ✅ **CREATED ML-808** — [LCA][SPIKE] BOM ingestion: turn unstructured BOMs into a structured product tree
+- **Type:** Story · **Labels:** `Supplier_Portal`, `research` · **Assignee:** Rohit Kumar
+- **Context:** The POC has to start from a customer BOM. Plan: `projects/lca/q4-plan.md`. This overlaps A1b (stage 1 BOM mapping, validation and vision extraction). A9 decides the approach and A1b builds it.
+
+**Goal:** Choose how we turn a customer's BOM into a structured, multi-level product tree we can calculate a footprint on. The BOM covers everything that goes into a product, from components and sub-assemblies to packaging such as the box.
+
+**Context:** BOM ETL is highly unstructured. BOMs come as ERP exports, Excel sheets with no fixed layout, PDF spec sheets and sometimes images. They often lack mass or material, mix units, and flatten or repeat the hierarchy. Packaging and consumables are often missing entirely.
+
+**Questions to answer:**
+* What do real Enersys BOMs look like? Formats, hierarchy depth, and which fields are present. ⚠️ Needs sample BOMs, via CS.
+* What's the **target BOM schema**? Assembly → sub-assembly → part, with quantity, unit, mass, material, supplier, origin, and a packaging flag.
+* How do we fill gaps, e.g. mass from spec sheets, or material inferred from part descriptions? How do we flag what's estimated vs supplied?
+* How do parts and materials map to emission factors? Can `ef_match` / staghorn-coral do material matching?
+* Where does a human review, and what does the user approve?
+
+**Options to compare:**
+1. **Deterministic parsers** plus per-customer mapping templates.
+2. **LLM extraction**, file by file, into the schema, including vision for PDFs and images.
+3. **A harness agent in the sandbox** that writes per-file transformation code, as in the data-ingestion demo, with approvals for uncertain mappings.
+4. **Reuse the Traci Ingestion Assistant** pipeline.
+
+**Outcome:**
+* A recommended approach, the target schema, and 2–3 real Enersys BOMs run through a throwaway prototype, with accuracy and gaps noted.
+* Follow-up POC tickets.
+
+**Timebox:** 4 days.
+
+---
+
 ## B. Waiting on results (draft once these land)
 
 | Waiting on | Owner | Expected follow-ups |
 |---|---|---|
 | **ML-788** Complyrag RAG architecture spike | Ram | The ticket itself promises "follow-up implementation tickets": the tool design if we go granular, and latency fixes. |
 | **ML-786** Fiscal-year filtering spike | Ram | A fix ticket for each gap it finds, if any. |
-| **ML-744** staghorn-coral evaluation (write-up in Notion) | Victor | Adopt the winning ranking method as the default, remove the losers, and plan integration toward prod. ⚠️ I can't read Notion (connector not authenticated). Can you paste the recommendation? |
+| **ML-744** staghorn-coral evaluation (write-up in Notion) | Victor | ✅ Read 2026-11-20: keep branching, use hybrid (C), fix the score first. The score fix is ML-805 (in progress). Follow-ups drafted as **S1** (re-run the eval) and **S2** (make C the default) in `drafts/sprint-23-gaps.md`. |
 | **ML-713 / ML-714** MCP spike + harness tech design | Sagar | Next harness stages, e.g. the "walk" stage after ML-791's crawl. |
 | **ML-789** harness background jobs | Sagar | Its "Still open" question: queueing a wake-up run behind an active run. |
 | **ML-778** Remove Claude 4.x compatibility | Rohit | Already exists. The 5.5 soak runs "a few weeks" from ~Nov 10, so it probably fits Sprint 24. |
@@ -159,7 +242,7 @@ The harness, and any engine it still uses, answers every unanswered tool call in
 
 ## C. Backlog cleanup (no new tickets, just decisions)
 
-1. **ML-640** (LCA skeleton) has been in **REVIEW since Sprint 20** and isn't in any sprint. It needs to be merged or reviewed before A1. Also: should it move from Sagar to Victor?
+1. **ML-640** (LCA skeleton) has been in **REVIEW since Sprint 20** and isn't in any sprint. Since LCA is moving to the harness (A1a), decide whether to close it or merge only its non-LCA fixes.
 2. **ML-720** (complyrag empty responses) is assigned to Sagar but labelled Compliance, and has carried over 3 sprints. Its blocker ML-716 is Deployed. → Reassign to Ram?
 3. **ML-794** (new Traci bug, Nov 12) is **unassigned**.
 4. **Traci backlog:** about 15 open items (mostly prym and eos customer bugs, plus ML-632/634/595/597) are assigned to Sagar. With Sagar on the harness, who owns Traci now: Rohit (Scope 3) or Ram, who fixed the recent Traci bugs?

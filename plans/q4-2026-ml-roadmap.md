@@ -16,7 +16,7 @@ Q4 ends Dec 31. After Sprint 23 (Nov 23 – Dec 7), about **2 sprints are left**
 | 4 | AI responses in first person, not "the undertaking" | Compliance | Must | XS | In progress | Ram | ML-787 |
 | 5 | Automatic EF matching for deterministic flow | Scope 3 | Must | M | In progress | Victor | epic ML-712 (staghorn-coral) |
 | 6 | Scope 3 Claude Skills | Scope 3 | Must | S | In progress | Maxi | **none** in ML (Resources: BE, Product) |
-| 7 | LCA Enersys POC | Insights/Data Layer | Must | — | Not started | **Rohit** | epic ML-639; A1a/A1b drafts |
+| 7 | LCA Enersys POC | Insights/Data Layer | Must | — | Not started | Rohit | epic ML-639; ML-807, ML-808; A1a/A1b drafts |
 | 8 | Kion onboarding | Scopes 1 & 2 | Must | S | In progress | Chethan Patharla | epic ML-585 (unassigned) |
 | 9 | Migrate Barnes Industrial to new Abbyy process | Scopes 1 & 2 | Must | M | In progress | Chethan Patharla | **none** (ML-206 is an old Barnes bug) |
 | 10 | Updated Traci in Insights, connected to Scope 1, 2 & 3 data | Insights/Data Layer | Should | — | Not started | Sagar | **none** |
@@ -57,7 +57,7 @@ Q4 ends Dec 31. After Sprint 23 (Nov 23 – Dec 7), about **2 sprints are left**
 - **Blocking UX decision:** chat per measurement, or always on? Sagar needs this to build the agent. Poppy and Colby are designing the flow.
 - Effort is mostly FE and ML, with little BE. Final sizing isn't done. Hirschmann Auto offered to help build it.
 
-**7. LCA Enersys POC** (Rohit, Must). Value: a proof of concept for product-level LCA footprints. The page is otherwise blank.
+**7. LCA Enersys POC** (Rohit, Must). Value: a proof of concept for product-level LCA footprints. The page is otherwise blank. **Brian confirmed on 2026-11-20 that Rohit owns it, with a working POC due by the end of Q4.** The plan is in [`projects/lca/q4-plan.md`](../projects/lca/q4-plan.md), and the Sprint 23 spikes are **ML-807** (data points) and **ML-808** (BOM).
 
 **10. Updated Traci in Insights** (Sagar, Should). Value: ask Traci in Insights and get answers drawn from Scope 1, 2 and 3 data together. The page is blank. In harness terms this needs the Snowflake MCP (ML-791), and the Data Ops Snowflake MCP/auth work.
 
@@ -67,7 +67,7 @@ Q4 ends Dec 31. After Sprint 23 (Nov 23 – Dec 7), about **2 sprints are left**
 
 1. **Harness timing vs Q4.** Row 2 is a Must, size L and not started, and it depends on the harness. The harness isn't deployed yet: Sagar still has to fix queuing and background jobs, add in-chat graphs and the Snowflake MCP, then port API/auth and deploy. With about 2 sprints left after Sprint 23, row 2 Phase 1 is at risk unless the per-measurement vs always-on UX decision lands soon. Rows 10 and 11 (Should) realistically slip to Q1.
 2. **Sagar is the owner on 3 rows** (harness, Insights Traci, Ingestion V2) plus the Traci bug backlog (Sprint 23 draft, item C4). Two of these are size L.
-3. **LCA ownership mismatch.** Notion has **Rohit** on the LCA Enersys POC. `TICKET_CONVENTIONS.md` has Victor as the LCA owner, and Sprint 23 draft A1a assigns Victor. Which is right?
+3. ~~LCA ownership mismatch~~ Resolved 2026-11-20: Rohit owns LCA.
 4. **Chethan Patharla** owns Kion and Barnes/Abbyy, but isn't in the team table in `TICKET_CONVENTIONS.md`. Jira also has a set of Abbyy process-skill tickets (ML-337…ML-355) in QA assigned to Chethan. Is Chethan on the ML team? Epic ML-585 (Kion) is unassigned.
 5. **No ML ticket yet** for rows 2, 6, 9 and 10. Row 6 lists BE/Product as resources, so it may not need one.
 6. **Blank Notion pages:** rows 1, 7, 10 and 11 have no goal or scope. The harness row could link to `projects/harness/`.
