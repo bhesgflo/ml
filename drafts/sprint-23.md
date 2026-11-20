@@ -228,33 +228,32 @@ The harness, and any engine it still uses, answers every unanswered tool call in
 
 ---
 
-### A10. ✅ **CREATED ML-812** — [harness][Bonobo][SPIKE] Get Insights output from the harness into Bonobo
+### A10. ✅ **CREATED ML-812** — [harness][Bonobo][SPIKE] Validate that the harness can access Bonobo and retrieve Insights information
 - **Type:** Story · **Labels:** `Platform`, `research` · **Assignee:** Sagar Thacker, with Rohit Kumar consulted (he has done most of the Bonobo work)
-- **Context:** Brian, 2026-11-20: start targeting incorporating Insights output from the harness into Bonobo. It will take several steps, and this spike plans them. Related: R3 (Traci in Insights over Scope 1–3 data, in `drafts/sprint-23-gaps.md`), ML-791, ML-792, ML-809, ML-810.
+- **Context:** Brian, 2026-11-20: the direction is **Bonobo → harness**. The harness has to reach Bonobo and retrieve Insights information from it, not push its output into Bonobo. The ticket was first written the other way round and was rewritten the same day. Related: R3 (Traci in Insights over Scope 1–3 data, in `drafts/sprint-23-gaps.md`), ML-791, ML-792, ML-809, ML-810.
 - ✏️ Sagar already has H1, ML-790, ML-791, ML-792, ML-803 and ML-810 this sprint. This may have to start late in the sprint or carry over.
 
-**Goal:** Decide how the Insights output a harness agent produces (answers, charts, generated files and reports) gets into Bonobo, and break that into step-by-step tickets that follow the harness milestones.
+**Goal:** Prove that a harness agent can reach Bonobo and pull back Insights information from it, so Traci can use what Bonobo already produces. Then plan the steps to make that production-ready.
 
-**Context:** Bonobo runs our workflows (complyrag gap assessment, EPD, climate risk, AI summary, EF recommendations). It has request contracts (ML-643), workflow configs (ML-690), a notification service (ML-691) and Langfuse tracing. The harness is the new agent layer. Today its outputs live only in its own session store: files in S3 per session, versioned, plus threads in Postgres. The harness meeting agreed that bulk runs stay as workflows, so Bonobo stays, and the two need a defined hand-off.
+**Context:** Bonobo runs our workflows (complyrag gap assessment, EPD, climate risk, AI summary, EF recommendations). It has request contracts (ML-643), workflow configs (ML-690), a notification service (ML-691) and Langfuse tracing. The harness is the new agent layer, and the harness meeting agreed that bulk runs stay as workflows. So the agent needs to **read from** Bonobo rather than redo that work. The data flows Bonobo → harness. This is the first step of a multi-step effort.
 
 **Questions to answer:**
-* **What output, specifically?** Chat answers, charts (PNG now; HTML and dashboards later per the 4 visualization levels), generated files (docx, xlsx, HTML/PDF reports), and the queries and sources behind them. Which of these does Insights need Bonobo to hold or act on?
-* **What does Bonobo do with it?** Store it as the system of record, serve it to the Insights UI, trigger a workflow (e.g. scheduled regeneration of a report, notifications), or a combination?
-* **Contract:** what does a harness → Bonobo request look like, following Bonobo's existing request-contract and config patterns? Who owns the schema?
-* **Sync or async:** does the agent call Bonobo directly in a run, or hand off through a background job or event? Is the existing event bus (ML-761) an option?
-* **Storage and tenancy:** copy from harness S3 into Bonobo, or reference it? How do tenant isolation, retention and versioning carry over?
-* **Tracing:** how is a harness trace linked to the Bonobo workflow trace in Langfuse (tenant, service, user)?
+* **What Insights information does Bonobo hold?** Which workflow outputs, results or summaries are useful to an Insights agent, and where do they live (Bonobo API, its database, S3, the knowledge base)?
+* **Access path:** does the agent call an existing Bonobo endpoint through a custom tool, or through a Bonobo MCP server? The harness meeting said back end owns the per-platform MCP servers and Sagar builds the client side. Does an endpoint that fits already exist, or does one need adding?
+* **Auth and tenancy:** how does the harness authenticate to Bonobo, and how does it make sure an agent only sees its own tenant's data? How does this tie into the auth port (ML-810)?
+* **Shape and size:** what comes back (JSON, files, references), and is it small enough to go straight into the agent's context or does it need paging or summarizing?
+* **Environments:** can this be tested locally against Bonobo dev or wip, and what network access does the harness need?
+* **Tracing:** can the harness call be linked to Bonobo's trace in Langfuse?
 
-**Options to compare:**
-1. **Bonobo API:** the harness pushes finished outputs to a new Bonobo endpoint, and Bonobo is the system of record.
-2. **Bonobo as an MCP server/tool:** the agent calls tools such as "save insight" or "run workflow" when it decides to, behind approvals.
-3. **Events:** the harness emits an "insight produced" event and Bonobo consumes it.
-4. **Shared storage:** Bonobo indexes the harness S3 outputs in place.
+**Validation (proof of concept):**
+* From a local harness run, an agent retrieves at least one real piece of Insights information from Bonobo (dev or wip) for a test tenant and uses it in an answer.
+* A request for another tenant's data is refused.
+* The call shows up in the harness trace in Langfuse.
 
 **Outcome:**
-* A recommended option, with a sketch of the contract and a data-flow diagram.
-* A sequence of follow-up tickets, each tied to the harness milestone it needs: local, wip (ML-809), auth (ML-810), Snowflake MCP (ML-791).
-* Agreement with Rohit on the Bonobo side.
+* A short write-up covering what worked, the access path chosen (tool or MCP), the auth approach, and any gaps on the Bonobo side.
+* Follow-up tickets, each tied to the harness milestone it needs: local, wip (ML-809), auth (ML-810).
+* Agreement with Rohit on any changes needed in Bonobo.
 
 **Timebox:** 3 days.
 
