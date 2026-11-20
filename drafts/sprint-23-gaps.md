@@ -1,7 +1,7 @@
 # Sprint 23 — Draft tickets (Q4 gaps)
 
 **Sprint:** Sprint 23 (id 5841), Nov 23 – Dec 7, 2026. Brian said on 2026-11-20 to target Sprint 23 for now. Tickets blocked on other work (H2→R1, S1→S2, R3) can carry over. The **⇡ S23** marks are left over from when these were Sprint 24 candidates.
-**Status:** H2 created as ML-809 (2026-11-20). The rest are drafts.
+**Status:** created 2026-11-20: H2 = ML-809, H3 = ML-810, S1 = ML-811. The rest are drafts.
 **Source:** gaps found in `projects/harness/roadmap.md` (meeting next steps with no ticket) and `plans/q4-2026-ml-roadmap.md` (Q4 roadmap rows with no ML ticket).
 
 Legend: ✅ approve as-is · ✏️ edit · ❌ drop
@@ -63,7 +63,7 @@ The harness only runs on Sagar's laptop. The front end can't integrate with it, 
 
 ---
 
-### H3. [harness] Port platform auth and the agent API integration from mt-gorilla
+### H3. ✅ **CREATED ML-810** — [harness] Port platform auth and the agent API integration from mt-gorilla
 - **Type:** Story · **Labels:** `Platform`, `enhancement` · **Assignee:** Sagar Thacker
 - **Context from the meeting:** Maxi said this is mostly porting from mt-gorilla. Franco plans a front-end feature flag that switches between the mt-gorilla and harness backends.
 
@@ -188,7 +188,7 @@ A user in Insights asks Traci a question and gets an answer drawn from their Sco
 - **Small set:** 20 rows × 2 categories.
 - **Baseline cost is missing** from Langfuse (empty `costDetails`), so baseline $/row is only an estimate.
 
-### S1. [staghorn-coral] Re-run the branching evaluation after the ranking fix
+### S1. ✅ **CREATED ML-811** — [staghorn-coral] Re-run the branching evaluation after the ranking fix
 - **Type:** Story · **Labels:** `Scope3`, `experiment` · **Assignee:** Victor Zhang
 - **Follows:** ML-744 · **Blocked by:** ML-805
 
@@ -207,7 +207,7 @@ A user in Insights asks Traci a question and gets an answer drawn from their Sco
 
 ### S2. [staghorn-coral] Make hybrid ranking (C) the default
 - **Type:** Story · **Labels:** `Scope3`, `enhancement` · **Assignee:** Victor Zhang
-- **Follows:** ML-739 (option C) and ML-742 (runner modes) · **Blocked by:** S1 confirming the recommendation
+- **Follows:** ML-739 (option C) and ML-742 (runner modes) · **Blocked by:** S1 (ML-811) confirming the recommendation
 
 **Goal:** The deterministic flow ranks branched paths with hybrid (C) by default, which gets A's accuracy and only calls the judge on close rows.
 
