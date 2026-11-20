@@ -1,7 +1,7 @@
 # Sprint 23 — Draft tickets (Q4 gaps)
 
 **Sprint:** Sprint 23 (id 5841), Nov 23 – Dec 7, 2026. Brian said on 2026-11-20 to target Sprint 23 for now. Tickets blocked on other work (H2→R1, S1→S2, R3) can carry over. The **⇡ S23** marks are left over from when these were Sprint 24 candidates.
-**Status:** all drafts, nothing created.
+**Status:** H2 created as ML-809 (2026-11-20). The rest are drafts.
 **Source:** gaps found in `projects/harness/roadmap.md` (meeting next steps with no ticket) and `plans/q4-2026-ml-roadmap.md` (Q4 roadmap rows with no ML ticket).
 
 Legend: ✅ approve as-is · ✏️ edit · ❌ drop
@@ -40,7 +40,7 @@ Queued user messages and job wake-ups run one at a time per thread, in a defined
 
 ---
 
-### H2. Deploy the harness (panda) to wip
+### H2. ✅ **CREATED ML-809** — Deploy the harness (panda) to wip
 - **Type:** Task · **Labels:** `Platform` · **Assignee:** Brian Hirst (confirmed 2026-11-20), with Sagar Thacker
 - **Context from the meeting:** new repo, deployed to dev first, with mt-gorilla running alongside it.
 
