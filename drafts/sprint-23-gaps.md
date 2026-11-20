@@ -1,7 +1,7 @@
 # Sprint 23 — Draft tickets (Q4 gaps)
 
 **Sprint:** Sprint 23 (id 5841), Nov 23 – Dec 7, 2026. Brian said on 2026-11-20 to target Sprint 23 for now. Tickets blocked on other work (H2→R1, S1→S2, R3) can carry over. The **⇡ S23** marks are left over from when these were Sprint 24 candidates.
-**Status:** created 2026-11-20: H2 = ML-809, H3 = ML-810, S1 = ML-811. The rest are drafts.
+**Status:** created 2026-11-20: H2 = ML-809, H3 = ML-810, S1 = ML-811, S2 = ML-816. The rest are drafts.
 **Source:** gaps found in `projects/harness/roadmap.md` (meeting next steps with no ticket) and `plans/q4-2026-ml-roadmap.md` (Q4 roadmap rows with no ML ticket).
 
 Legend: ✅ approve as-is · ✏️ edit · ❌ drop
@@ -205,7 +205,7 @@ A user in Insights asks Traci a question and gets an answer drawn from their Sco
 * Cat 3's `3000709`-over-`3000414` pattern is gone, or explained.
 * A yes/no recommendation on making C the default (S2), added to the ML-744 Notion page.
 
-### S2. [staghorn-coral] Make hybrid ranking (C) the default
+### S2. ✅ **CREATED ML-816** — [staghorn-coral] Make hybrid ranking (C) the default
 - **Type:** Story · **Labels:** `Scope3`, `enhancement` · **Assignee:** Victor Zhang
 - **Follows:** ML-739 (option C) and ML-742 (runner modes) · **Blocked by:** S1 (ML-811) confirming the recommendation
 
