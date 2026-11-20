@@ -1,0 +1,1441 @@
+Sagar Thacker  0:07
+Cool.
+Um...
+
+Franco Grazio  0:08
+You want me to ping Maxi?
+
+Sagar Thacker  0:10
+I did ping him. I don't know. He did not reply. I reply message been on Slack.
+Um...
+Did I send my Brian guess I did?
+Record the since the meeting is being recorded, you know.
+I can see it later on.
+What I wanted for this meeting is...
+To give you a demo of what I've been sort of building as a POC on local machine and then
+How do we integrate back into mountain gorilla and forest elephant would be sort of, it won't be, I don't think one meeting would be sufficient, but then how do we make it a series of meeting and plan it out? Because this is one of the deliverables for the ML squad.
+To put it in the harness into our platforms, so quick demo. It's this is sort of the it's running on my machine. It's a simple chat interface using the same assistant UI we are using in.
+For A elephant, you could do a simple chat with it, and the prompts are fairly generic. It's just...
+You are a general assistant. There are certain files and folders you can work with to put your files in. Like when you create a new file, where do you put it and stuff? And some basic commands for approvals, but just 10 lines of code or prompt.
+You could have some sample charts that you could do.
+Better to chat with you like a normal human. I'm sorry, like Cloud. How are you?
+Then there are a few small features where you have files and jobs. I'll get back to this part in a in a minute, but there are there is a concept for...
+Background jobs, where if I say, OK, run a job, wait for three minutes, and start a prompt, start up, write a Python script that says, "Hello, World!"
+It will, if you look at the UI, very similar to how cloud does its thinking. Okay, I'm going to do this. I'm going to start the job. This is the command. I'm going to run it. I'll just start a background job and then on the side and then you can add these for.
+debugging purpose. So it will say, okay, I'm sleeping and then it will print this out when it's done. In the meantime, we could also chat with it. So it's a background job. Write about PSD.
+In 300 words.
+So you can continue doing that. So if it's like a job or a bad job that takes time, you could do it. MCP also supports.
+Job like background job, so you don't need to define it in the harness, but you can use something from MCP and write it up. There is a bug which I'll show you about the bug. I'll do another thing to show.
+All right, Sandeep.
+So if you, so when it is doing a job, it's also there's a queuing mechanism that you see in Claude. Like you type a message, it queues it up. It's doing the same thing here. And it's done with that first part, it queued it up, and then it will pick up the second one and do it. This was necessary because of background jobs.
+I'll go into detail some other time, but just wanted to lay out some features.
+And there are some bugs I made for doing changes on it, blew it up.
+Um...
+Since this is working.
+And then it wrote something about our AI, and that's done.
+To give you a paint-up picture, this harness is a very general.
+Unlike meant to be a generalist, a harness has some core pieces where...
+You write a message, like write a prompt, it gives you back the response. Tool calling is the perimeter for being making it as an agent. Support for...
+Background jobs or jobs?
+Then, queuing and...
+MCP support is still not there, but we should, we'll add it up. Also, we can write skills in the.
+Um, repo, and it will it can also work with skills, so that also integration has already been done.
+And.
+
+Franco Grazio  5:30
+Are the skills per tenant, per user, or per agent?
+
+Sagar Thacker  5:33
+At the moment it is per, so there will be skills. We can make a different hierarchy at the moment is at a agent level, but the plan would be to build it.
+
+Franco Grazio  5:44
+Okay.
+
+Sagar Thacker  5:47
+If possible at a user level, there can be some tenant level, but...
+Everything goes into how do you want to...
+Route things, because everything that we do, it's basically when you, when we, so the way skills works is the name and the description goes into the system prompt, or somewhere it goes, it knows that there is something that exists that you can use. If it is hard-coded in the repo, we can just tell it, okay, load, load those files from like a registry or something, like a mechanism.
+and build that system prompt. If it is at a user level, we just need to tell it, okay, for this user, use that, that is also a location for you to fetch it. If it is a tenant level, we can do all three levels. That's not a...
+There is also a concept for memory which will probably come up where we'll be there.
+I don't know if the memory has to be at the data.
+Tenant level and at a user level or memory.
+Say.
+I want the output always in a Jason format.
+It's my preference.
+It's my sort of thing. So remember that and always use that.
+You know that structure of writing for writing reports.
+It may be so more relevant for compliance for writing reports.
+I want the tone.
+The company has its own way of writing a public report, so you want that to own that langu with that structure. So you save it up there once and every answer that the agent writes, it's using that same.
+Structure.
+And this is.
+Stockton so when it was done, the background job finished it.
+So when the oh, I missed it and the background job is over, it sends a message and it you see the output as OK it will auto trigger the agent that my job is over and based on the file it will see OK Hello world.
+Another thing that I did is.
+There's a concept for artifact that we already have.
+I tried to do the data ingestion agent without at having any knowledge of what data intression is.
+We can upload files to it.
+It gets uploaded, we can see the files on it got uploaded and.
+I'm using a library.
+Probably you'll have to change it.
+That's Chrome only.
+But you can see everything like in Excel.
+Or any other file formats that we have.
+And it does all the job of figuring it out, writing a piece of code for that particular file. If you want to. It can run bash commands, it can run.
+Scripts and everything is being done in a sandbox environment that AWS has as a service in bedrock called code interpreter.
+So everything is being run in that sandbox. Mounting mountain Gorilla today runs it as a sub process just like a thread sub process.
+In the same API.
+Where the fast AP is running, but this one is it has a. This code interpreter has its own CPU, its own memory and storage, and whatever you do, you can set up your network network rules as well, so it does not want to. If you don't want it.
+To use the Internet or you know if you want to allow only certain ingress, you can do it.
+A network policy.
+So it writes a piece of code.
+That we want to run.
+It would run the bash commands to check everything that is happening.
+So just make allums.
+I'll tell. OK, I'm not.
+Everything looks right.
+Change the column value or it will do all of that thing.
+It will run the file, but it's running in the sandbox and you'll get the output.
+The way we wanted in the same template structure and it doesn't know Scope 3.
+It doesn't know anything about SQL SER.
+The harness is meant to be more of a general.
+Harness like cloud code.
+You could hook it if.
+Also plan if it would be great to have customers can link their own Canva because they all have their own.
+I don't know what the UI thing is called.
+Their own brand structure colors.
+All of those things. So you don't always want to put it in a platform for every small thing it gets connected there you can can work in that info, can get that info from write a report, create a PPT. You can do everything on those lines, this AG.
+Can also create.
+I'm not added the part of images so so I want to take what we what you guys are building analyst As for the graphs so BI graphs and all those pieces into the harness.
+Which which will be a primitive for the agent.
+So anybody that's it's not only part of insights, but any agent that you build across like insides, you might also want to use it with Scope 3 when you're doing anomaly detection.
+So you want to try to find so there it can be used.
+Compliance. If you want to create graphs or structures for your reports that it can be used there as well. So there are some primitives to that.
+I just told it back in the data create some demig graphs.
+It does not have AUI for graph, but it will create a graph for you using code and it's all Python code written to generate this graph.
+And it saves it as an PNG.
+So if you really have data, it will write its own Python code. It will.
+We can give it different E3 dot JS or we can give it different JavaScript libraries as well like create a skill for visualize like visualizations and diagrams.
+Structure it and it can do it.
+I also wanted to have react components in the chat so it becomes.
+It can write. It can fill that components with those interactive graph that it wants to.
+But baby steps.
+So just get the graphs in the UI first.
+Any questions?
+I know I just came through features and probably worked with clients is all known, but this is something that just wanted to give a sneak peek.
+OK, this is what our AI sort of also moving towards.
+It's more general.
+You add your skills so you're not adding tool specific for every small thing that we do.
+It has to have its core parameters and then.
+We only add a tool or a skill.
+If it we only add a skill. If you want to repeat something, we only add a tool which is if it is very specific to something other than that it it should be able to write its code for any user request given the data and the stuff are.
+There. So it will give you 1 output you want it to be.
+Excel CSV. It can work with. It can create DOC file.
+Right, a docx file for estim 300 word for under words it will. It has those Python docx libraries.
+It will import it.
+It will write it.
+Include.
+The table in that report as well.
+You can have again brand schematics or stuff for it. You to create a report.
+
+Maximiliano Cecilia  13:45
+Do you have? Do you?
+Do you have a way to hide those comments?
+
+Sagar Thacker  13:51
+That is my next step.
+I have not tried it.
+I.
+I I just see it right now because I want to see what it's doing, but in future games.
+
+Maximiliano Cecilia  13:56
+Yeah. And and I think we, we want both, if we do it, we need to have the the option to do both.
+
+Sagar Thacker  14:02
+Yes, but also I'm gonna use LAN fuse that we use for.
+Tracing and other so that would be there for agents and you could actually track everything. All tool call all input, output responses and everything.
+
+Maximiliano Cecilia  14:09
+For tracking and everything, yeah.
+
+Sagar Thacker  14:18
+So it wrote a docx file for me here.
+Why can't I preview it and it has version?
+I forgot about that.
+So it has versioning. So if the same file is overridden, it creates different versions of it.
+And it looks like a word like.
+But sometimes, like what 5?
+So finding reports or even if it is insights, you get a bunch of insights and from that insights you want to create a particular report and share it with somebody. It will do it for you.
+We don't need any specific report, writing or other pieces.
+So that that was sort of the demo. Any questions?
+
+Franco Grazio  15:12
+This is awesome.
+Is is the harness meant to completely replace Manton, Gorilla or complement it?
+
+Sagar Thacker  15:18
+Replaced.
+Because Mountain Gorilla, I'll. I'll come to that.
+But yes, it it's probably will replace it.
+
+Maximiliano Cecilia  15:27
+But it's it's a it's inside montgarrita right now, right?
+
+Sagar Thacker  15:31
+This is no this is not infamous.
+It's a different I was working with different.
+Yeah, it's a different Rep.
+I was working locally because it has.
+It has the UI in.
+It has the hardness in it and everything.
+It's inside the same repo apps.
+It has web.
+I wanted to create a desktop as well.
+So App, Web, desktop and some other. If you want to do it.
+So this is where.
+I have zero clue about front end, so this is where I'm gonna lean on you guys.
+To put to do was for front end, but we can.
+I have a slide ready that I can talk through, talk through and I have also architectural diagrams for word. Panda is doing at the moment.
+So that.
+But we can move it to mountain gorilla. I I build it separately, but we can just move everything to Martin Garrila.
+Because it will require there are API changes.
+There are.
+I'll show you.
+Where did this go?
+Done by clot.
+Umm.
+Can you see my see the slides?
+
+Maximiliano Cecilia  16:54
+Yeah.
+
+Sagar Thacker  16:56
+Cool. So at the moment, for the particular like an agent, the UIS we have a shared UI component, but it's being it.
+I just have the primitives, but the actual UI code is in the apps. If I'm not wrong and Franco, please correct me.
+I tried Claud to figure it out but.
+The chat interface is per app where in Panda it's a shared library for UI and I want to break it down into components.
+As well, but it's a shared library that if you pull it in any app it you should have the chat interface.
+And the the API part is we have APIs for every.
+Slash data ingestion slash API/V1 for SQL. So if you add more agents to different apps, we're adding more APIs and something changes. We're updating all the APIs.
+And then the Third Point is.
+It's OK.
+For a framework level, what it means for like Mountain Gorilla and the front end versus Panda which is the local part front end, it moves to a shared library. If we can do it in forest elephant like a shared library with different panels because.
+Just to give you an example why that is necessary.
+New.
+Where did that part go?
+I think it's understand.
+Compare.
+
+Victor Zhang  19:17
+I have one quick question.
+So we are replacing Tracy with this, right?
+
+Sagar Thacker  19:25
+Yep.
+
+Victor Zhang  19:27
+OK.
+
+Maximiliano Cecilia  19:28
+I mean, this is going to be the new thres.
+
+Victor Zhang  19:30
+OK, OK.
+Perfect. OK.
+
+Sagar Thacker  19:38
+You don't find things when you really wanted to, and especially in demo. So sorry.
+Yes, finally.
+Just a quick.
+For for example for.
+Compliant. I don't know if how familiar you everybody is with compliance, but in the middle there are frameworks questions and answers and the right you want a chat interface. So in a small right panel you don't want threads, you don't want all the.
+You don't want the UI to be too bloated.
+So you would rather have just the chat interface in the middle like you do it with.
+I don't know how I like this interface where they use like just.
+You can just start.
+And if you might have threads or something but this part and for scope three or insights, it's a chat interface with a thread and everything and for data scope three we have the data in the middle to see the files and stuff and something else. So middle chat.
+Element is the common part, but then you want differences in the UI, so this can be a component where you want to import an audit. Up to you.
+But always will be there.
+So.
+API right now is.
+Agent select data ingestion API.
+And back end can correct me if you want to do a different architecture but.
+It goes to one API structure where in the API request when you start create a new session, you just in the the front end can send the agent name which is already defined in the back end and after that every time that session remembers that agent and you.
+Just you don't.
+We don't need to again and again and tell it.
+And just the same endpoints that a common endpoint that you use are being used across all the agents and it's easier to create new agents or if something changes in the same endpoint every all the agents get start change.
+In the.
+Mountain gorilla we were creating our own.
+Graph what I mean by that is.
+There are.
+Two ways that graphs were created.
+One was the native route. There was always.
+A conditional check.
+We started by building our own reason should continue the permission git and everything versus.
+These are all the things built into LINQ chain.
+And they provide their own agent harness like a small agent called deep agents, which has.
+The same thing that we are doing, plus the edit tool file change.
+Execute bash commands.
+They have all those pre built in the framework so we don't have to define it our own.
+So which I am leaning towards for this particular release, but the harness is still flexible. If you want to build our own graphs.
+We can.
+So if you want to build a very specific agent for a very specific purpose, you can do it.
+Everything else here stays the same.
+The core part is Sandbox was a child process in the same fast API server. Nugent gets replaced with the agent code code interpreter.
+Auth and stuff and other in my local, so that's a different problem.
+Then so this is sort of the architecture.
+Any front end app gets authenticated.
+Panda has only one API endpoint for agents, a common API endpoints gets routed to whichever agent we are using, and each agent can have its own prompt, its own tools, its own MCP.
+Defined in the config and for migration there will be some database.
+Tables kept and later on replaced.
+And that's it.
+And these are some migration pieces but.
+A lot generated those things, but.
+All of this, that's fine.
+These are top level things I wanted to talk about.
+Like.
+How the harnesses a bit different from what we have built?
+And then.
+Something that I really.
+I'm gonna say what?
+What do we do?
+You guys suggest do we put it in?
+Do we keep it in mountain go to like a shared library?
+Put it in forest elephant and each app does a small tweak.
+Or how do you guys want to maintain that part because.
+Even for like approvals and stuff, everything has to be a common.
+The more generic you can maintain, it's better versus app specific things.
+So yeah, because in claudos you will see that it has approvals for check boxes.
+Like multi select single select input your text.
+So like how you want to ask a user if it's a general interface that works with any.
+Where you want to ask.
+Like the agent wants to ask you a question.
+So that.
+
+Franco Grazio  25:40
+Yeah, I guess.
+Product wise these I mean this is mostly I think a product decision whether we want to do like agent first or feature first, right?
+Currently we're doing like feature first, so we have separate instances for the use cases for scope 3 for example which is ingestion or insight which is just show me the data or compliance right?
+So we are doing use case first. If we do agent first.
+First, we'll for example, I think this is what you are suggesting.
+We have a single agent that spans all the products in in our platform and you can just chat with that agent and it does whatever.
+You need it for the use case that you prompted, so you you wouldn't have like a separate.
+Instance of that.
+
+Maximiliano Cecilia  26:34
+I I think I I think that from what I talked with Ann and Poppy, they both want to go into that direction.
+
+Franco Grazio  26:42
+Yeah. OK.
+
+Maximiliano Cecilia  26:42
+So I'm guessing it's going to be mostly the same agent with some context that will make it change.
+And.
+I still have the doubt on the the different UIS that we.
+
+Sagar Thacker  26:54
+So.
+
+Maximiliano Cecilia  27:00
+Have everywhere right on how they want to tweak that.
+
+Franco Grazio  27:03
+Yeah.
+
+Sagar Thacker  27:05
+So I agree it's an agent first, but the way it is structured is demo is a current agent that is actually running in the.
+Local, but you can create a new agents and when the front end hooks up like you want to call, initiate a session. You just say which the agent's name and it will pick it up.
+So my lean, I'm leaning towards one agent like Claude code is a single agent.
+
+Maximiliano Cecilia  27:28
+Yeah.
+
+Sagar Thacker  27:33
+Or like the harness is a single agent with coding.
+
+Maximiliano Cecilia  27:34
+Yeah.
+
+Sagar Thacker  27:36
+The score work does design so many things.
+Everything is hooked up to MCP or some other way. The core problem for an agent is how do you provide context?
+
+Maximiliano Cecilia  27:48
+Every time.
+
+Sagar Thacker  27:49
+The way you every time and how do you maintain that context and how does it?
+How can it run based on any it's freedom to run?
+The only blocker I see with us is.
+And what they have?
+But we it's difficult for us to replicate is the auto mode.
+I I in the right now I just given like per approvals false.
+
+Maximiliano Cecilia  28:11
+Yeah.
+
+Sagar Thacker  28:13
+It's not ask like when it ran, it did not ask me for any approvals, but if I turn it to true and run it, it will ask me for I have that UI part where it will ask you approve, reject or do you want to do say somet?
+Else.
+We don't have a way for it to say.
+Oh, this is a harmful command.
+Don't run it.
+So that is why everything runs in a sandbox, even if something goes wrong, it's happening in that sandbox.
+We don't have to worry about it.
+But yeah.
+But apart from that, I would lean on one agent with.
+Structuring the MCPS and context.
+So that it we don't have to maintain a lot of different agents.
+
+Maximiliano Cecilia  28:56
+Yeah.
+My my only concern with that actually is that if it's going to be so, you log the agent, it's going to log with the context depending on where you Click to open it.
+
+Franco Grazio  28:58
+Yep.
+
+Maximiliano Cecilia  29:08
+We don't want to end up having to add some kind of, OK?
+I want to start working on X in order to trigger the proper.
+Kill or path for that agent, right?
+But I know that's what they're aiming, so we should keep that in mind.
+
+Sagar Thacker  29:25
+So if my for for insights from my point of view insights is to get the data, there's a snowflake MCP. There's only one thing.
+You skills, graphs and all those things will be primitive in the harness.
+So those will be part of any agent you start with with so.
+It should be able to figure it out.
+Compliance. Also, if it required some data from other pieces, there should be an MCP for getting the data from the back end.
+Umm, whatever we wanted, like measurements, answers, guidance and stuff.
+And that's the only way it can actually get it.
+So, or even if we build different.
+Agents like, but they have it on.
+We have it there.
+It's still just a system prompt change, so like here we are still using the deep agent which has essay. The way I've defined it is you have to define its kind or type which is deep which which refers to deep agent, the system prompt and that's it you.
+Can hook it to any other and it has all the tools for writing a file, creating a file, editing a file.
+All those will be there with with Deep Agon.
+So you the only part changes is system prompt which we can easy to maintain.
+
+Maximiliano Cecilia  30:54
+It makes sense for me.
+
+Franco Grazio  30:57
+Yep.
+
+Maximiliano Cecilia  30:59
+I still don't know if how when to split the codes in the report. I think all the servers I part for sure we can basically drop.
+And and create a A brand new 2.0 branch in Montgarrita and slowly move to a new branch. That's fine.
+
+Sagar Thacker  31:16
+Yes.
+
+Maximiliano Cecilia  31:20
+The UI part up to you, Franco to spend some time to with it.
+Take a look.
+I don't know if it makes sense to keep it there to try to move it.
+To orangutan red panda.
+I don't know which one of the front end because I I we also.
+
+Franco Grazio  31:32
+Yeah, yeah. Or or a completely separate package, yeah.
+
+Sagar Thacker  31:34
+I'll.
+
+Maximiliano Cecilia  31:37
+Yeah, we also need to keep in mind that.
+The moment we are done with the analysis, we're done with ingestion.
+I'm guessing we are going to try to put the analysis inside scope 1/2.
+Right.
+
+Sagar Thacker  31:49
+Yes, for just FI compliance data interface is a deliverable this quarter.
+
+Maximiliano Cecilia  31:57
+Full full chat interface.
+
+Sagar Thacker  32:00
+Yes, like on the side, yes.
+
+Maximiliano Cecilia  32:01
+Yes, on the side.
+
+Sagar Thacker  32:04
+All right. But it just it just works with.
+
+Maximiliano Cecilia  32:04
+Ouch. OK.
+With what? I'll get the sender.
+
+Sagar Thacker  32:08
+The documents just the same thing that it's doing right now, just after.
+
+Maximiliano Cecilia  32:11
+The sender will have now but but through chat OK.
+
+Sagar Thacker  32:17
+So I'll I'll share you the zip file for this, the whole thing.
+
+Maximiliano Cecilia  32:23
+Just just create a branch in Mountain Gorilla and upload it there.
+
+Sagar Thacker  32:24
+It's buggy.
+
+Rohit Kumar  32:24
+Good afternoon.
+
+Sagar Thacker  32:28
+The whole thing.
+
+Maximiliano Cecilia  32:29
+Yeah, I mean create a new branch.
+
+Franco Grazio  32:30
+Yeah.
+
+Sagar Thacker  32:30
+OK.
+
+Maximiliano Cecilia  32:33
+And delete everything, upload that.
+
+Sagar Thacker  32:34
+That's fine.
+I'll do that.
+
+Maximiliano Cecilia  32:37
+I mean, it's not going to do anything.
+
+Franco Grazio  32:38
+Unless unless the infra is so different that it makes sense to have a separate repo and just the parking montegorilla and yeah.
+
+Rohit Kumar  32:43
+Saying please.
+
+Maximiliano Cecilia  32:45
+That's the other option.
+
+Sagar Thacker  32:49
+Package amount.
+
+Maximiliano Cecilia  32:49
+Create a new repo and eventually kill Montgarit in that.
+
+Sagar Thacker  32:55
+That is what I was gonna propose, but.
+
+Maximiliano Cecilia  32:58
+It's I I don't know if maybe it's easier that way to keep the other one running at the same time, yeah.
+
+Sagar Thacker  33:01
+It was easier.
+
+Rohit Kumar  33:03
+Yeah.
+
+Sagar Thacker  33:04
+Yeah, we can deploy it in like Dev.
+So plan was deployed in Dev to see if it works and then go back to Mountain Gorilla when people are still using because you guys are still working on the analyst and ABI part.
+
+Maximiliano Cecilia  33:18
+Yeah, yeah.
+And the analyst needs to keep Brian here all the ABA.
+
+Sagar Thacker  33:20
+Yes.
+
+Maximiliano Cecilia  33:21
+But we can't kill that for sure.
+
+Sagar Thacker  33:23
+Yes.
+OK.
+I'll upload it to our branch for now in Mountain Gorilla.
+And Franco?
+
+Maximiliano Cecilia  33:30
+Either way, create a new representative.
+But it's easy.
+
+Sagar Thacker  33:34
+Oh, then I'll create a new rapper.
+
+Maximiliano Cecilia  33:37
+Yeah.
+
+Franco Grazio  33:37
+OK.
+
+Sagar Thacker  33:38
+And the part Franco is still is one UI.
+It's not broken down into like the chat part and components you want to hide it and do it with feature flags.
+So if you so the idea, would the idea was you have the core part of chat you want which is common across different platforms, but then whichever things you don't want side panels or threads or something, those are components which can turn on and off.
+And if you want to create something new for your app, you can create it.
+Does not exist, but I'll leave it up to you.
+That was the idea I thought about.
+
+Franco Grazio  34:15
+Yeah. Perfect.
+Yeah, the the UI.
+We should probably check with Anna what we want to do because, for example, the idea behind the ingestion agent is that you have projects first.
+So the main thing that you need to see on the screen is the the file that you're working on and the agent is on the side.
+In this case, we kind of flip that over.
+
+Sagar Thacker  34:37
+I believe.
+I agree I have not spent time.
+
+Franco Grazio  34:40
+Yeah.
+
+Sagar Thacker  34:43
+I'm not had a discussion with Anna as well, but what I have poked them. I have poked the product team to think about the user experiences on the part where even today.
+What people are doing is somebody from the CS team is working with the customer to get the data or like look at the data, figure out what are good or bad about the data. Then there's a handoff.
+Well, everything is created.
+And then Maxim, Brian or somebody is working on that in cloud.
+How do you replace this with a chat?
+You, even if it is project, it does not.
+It's not a good taste for a product that is, from my point of view.
+
+Maximiliano Cecilia  35:24
+Yeah.
+
+Sagar Thacker  35:24
+I was pushing back so we can create like same projects in cloud that there are, but then different stages in it where you want working with different anomaly detections. You can have skills like what you have skills you can reuse but there are different parts where CS team.
+Can work with in the same.
+Product platform.
+So I don't know customer wants to see it or not. They can provide inputs.
+
+Maximiliano Cecilia  35:50
+I think it needs to be both.
+
+Sagar Thacker  35:51
+The.
+Driven by both.
+
+Maximiliano Cecilia  35:53
+Especially for the yeah. For for the Tracy side, for the for the scope 3 mentality side.
+The file needs to be like the project.
+
+Sagar Thacker  36:04
+Correct.
+
+Maximiliano Cecilia  36:06
+And you're working on that. It's client or CS.
+It's same.
+You're working that and that reaches to an end where the file is uploaded.
+So that one has in the begin and then.
+
+Sagar Thacker  36:17
+So right now what happens is when you work with sandbox.
+That sandbox everything.
+All the files uploaded are stored in S3 in the same.
+Session thread or we can put at a project level so when a sandbox also has a TTL it you can set it up.
+
+Maximiliano Cecilia  36:28
+Yeah.
+
+Sagar Thacker  36:35
+Maximum is 8 hours.
+We get charged by the R we use and idle time as less cost if it is ideal not working.
+Right now it's one hour.
+
+Maximiliano Cecilia  36:57
+Yeah.
+
+Sagar Thacker  36:57
+3 Then whenever you, it starts a new session. Everything is copied back to the sandbox and continues.
+
+Maximiliano Cecilia  36:58
+3.
+
+Sagar Thacker  37:04
+So that.
+Also stays, so that can be a project because all the files that you upload to that session or that project does not go away.
+You can chat, you can create new files.
+
+Maximiliano Cecilia  37:14
+Yeah.
+
+Sagar Thacker  37:15
+You can do whatever you want.
+In a way, it exists, but not in the UI fashion that we want.
+So I agree with your point that UI needs to be taken out, but that that's it.
+And we need to build MCP servers per platform which.
+Back and will own it.
+
+Maximiliano Cecilia  37:38
+I was going to take a look at it and they never even started.
+
+Sagar Thacker  37:41
+It's OK.
+It's OK.
+I want.
+I wanted to finish this up a long time ago.
+
+Maximiliano Cecilia  37:46
+So, so so they they.
+So they have this right now it's using the same.
+Posode for tracking threads, users and all of that.
+
+Sagar Thacker  37:57
+The tables names are 90% overlapping but don't think will be removed because the steps like you've seen steps in data ingestion is very specific for that particular app that does not exist in this common UI. There are certain data. That is why I was.
+Not leaning towards changing Mount Mountain Gorilla because we need to do then migrations and keep certain tables, not others.
+But 90% of the tables are the same.
+There are few new added because of the queue.
+That's it.
+
+Maximiliano Cecilia  38:37
+Great.
+
+Rohit Kumar  38:41
+So I have a doubt.
+So is the idea for us is to have one single UI and all the.
+All the agents which we have as an MCP which we can use.
+
+Sagar Thacker  38:57
+There will be 90% of the UR would be same.
+It might change for product depends upon the product, but chat interface is threads, chat UI files or other pieces on the right side.
+You can have a single agent everywhere, or you can have different agents.
+
+Rohit Kumar  39:14
+When is the Tuesday?
+
+Sagar Thacker  39:17
+Both will work and they won't be.
+
+Rohit Kumar  39:19
+In the Spirit 3.
+
+Sagar Thacker  39:22
+They will only be different based on the.
+MCP, or the skills that you set up for that agent, apart from that, every other thing could be the same.
+
+Rohit Kumar  39:29
+He's confusing.
+
+Sagar Thacker  39:31
+Or you can use the same one agent with different MCPS.
+
+Rohit Kumar  39:31
+OK.
+OK.
+So. So the differentiation that differentiation which we have right now for like different different products as in like in terms of UI.
+It will remain just the hardness of agent will change. Something like that.
+
+Sagar Thacker  39:48
+You and I would also change to a common UI.
+But it depends scope 3.
+Scope 3 is the only platform which has.
+Completely new different UI apart from the insights of the same chat interface would have the same so.
+
+Rohit Kumar  39:59
+OK, OK.
+OK.
+
+Maximiliano Cecilia  40:06
+I.
+I don't know, I think.
+I think scope three and inside might have similar UIS if they go full. If they go full dashboard mode.
+
+Sagar Thacker  40:11
+Why?
+
+Rohit Kumar  40:14
+I.
+
+Sagar Thacker  40:15
+So.
+
+Maximiliano Cecilia  40:16
+That they want to see all the charts as a kind of report, it's going to end up having been in the meeting, right?
+
+Sagar Thacker  40:23
+I'm not played with cloud dashboards, but if that is something I want to look how they build it, if it's a different page just like dashboard is a different page in the same app.
+
+Franco Grazio  40:23
+Yeah.
+
+Rohit Kumar  40:33
+That was saying I was like.
+Just said that's not an option.
+
+Sagar Thacker  40:37
+Or it's in the UI?
+Or it's like a file format of dashboard that they're created because cloud Doc's files.
+
+Rohit Kumar  40:43
+I don't know why.
+
+Sagar Thacker  40:44
+They created a new.
+Way of insulating their own docs PPT.
+
+Maximiliano Cecilia  40:47
+Yeah, they end up creating a new, yeah.
+Yeah.
+
+Sagar Thacker  40:53
+And that PPT is where.
+
+Maximiliano Cecilia  40:54
+Well, but, but they they are also doing a lot of time there, defunding to HTML and you ask for something. They end up getting.
+
+Sagar Thacker  41:00
+We can do that.
+We can that so the visualization part of the scale of visualizations will have will have 4 levels.
+
+Maximiliano Cecilia  41:02
+Full HTML.
+So.
+Yeah.
+
+Sagar Thacker  41:11
+1st is the basic graph that right now is an analyst.
+2nd is it can write arbitrary piece of code to generate a graph.
+3rd would be like it can be HTML so that and the third level will be an interactive component in the chat interface. If you want it to be.
+And 4th can be dashboards.
+So, like easy to complex, but I would start with the 1st.
+
+Maximiliano Cecilia  41:39
+Sure.
+
+Franco Grazio  41:40
+Yep.
+
+Sagar Thacker  41:44
+But if you tell to write an HTML pill for this, it will.
+It will do it for you.
+
+Maximiliano Cecilia  41:47
+Yeah. And I think it was option because you have full, but it's something that Frank, I don't remember if we ever come to an agreement with Anna.
+On on the final type of site, yeah.
+
+Franco Grazio  41:59
+I don't think we never fully. Yeah, but I think we were all leaning towards like an HTML self-contained highcharts wrapper.
+
+Maximiliano Cecilia  42:09
+Yeah.
+
+Franco Grazio  42:11
+So your report is just an HTML page, yeah?
+That you can print as a PDF and you have the best of both worlds.
+
+Sagar Thacker  42:21
+Make sense?
+
+Maximiliano Cecilia  42:22
+Yep.
+
+Sagar Thacker  42:25
+Good part of the you can tell it convert HTML to PDF and do it in a downloaded.
+I don't have to do anything, but I don't know.
+So the point point of the hardness would be don't add functionality if it if you tell it and it can do its on its own like that's it.
+
+Rohit Kumar  42:42
+Yeah, I think that is the case for the report writing thing like it. It generates an HTML and we have a plug in to to convert into docs.
+
+Sagar Thacker  42:48
+Temple.
+
+Rohit Kumar  42:52
+So if the hardness can do it, then we do not need to add it explicitly.
+
+Sagar Thacker  43:01
+Any other questions?
+I guess we are over time, but yes.
+I'll create the report and share it with you guys, but yeah, any questions?
+
+Franco Grazio  43:12
+In terms of release, I'm sorry. Go ahead. Sorry, victor. Victor.
+
+Victor Zhang  43:12
+One question is.
+Sorry.
+You, you go ahead first.
+It's fine.
+
+Franco Grazio  43:19
+OK.
+So in terms of release, I assume we'll have a feature flag maybe in the front end that we can point to either Monte Gorilla or Panda as a new back end.
+And we can toggle.
+
+Sagar Thacker  43:37
+How do you?
+My only question is how do you?
+I don't know.
+How about front? And how do you deploy?
+How do you toggle that UI?
+Does it point to a different?
+Because it's your app is being.
+Being deployed at that ECS or I don't get deployed. How do I deploy?
+Do I create a pandas package?
+Because so that it can switch.
+
+Franco Grazio  44:02
+Yeah. So we'll have both UIS available at all times and just a feature flag that either shows or hides.
+The specific UI that connects to Panda to the end user and we'll have both mountain Gorilla and Panda app and running at the same time as the back end.
+So we wouldn't impact, I don't know, like ABM Bev's demo. If we release Panda or something in the meanwhile.
+
+Sagar Thacker  44:33
+Sure.
+And and feature flag would make sense.
+The technicality up to you up front.
+
+Rohit Kumar  44:45
+OK.
+
+Sagar Thacker  44:47
+Victor, you had a question?
+Oh, go on.
+
+Maximiliano Cecilia  44:50
+Better go with the go with the.
+
+Victor Zhang  44:53
+Yes. I wonder like if the client was using this new agent.
+Is it?
+And they add their own skills, and if they add their own skills.
+Since it's it's in a web page, right?
+Like how?
+How do we save their skills or?
+
+Sagar Thacker  45:14
+It doesn't have that functionality today.
+
+Victor Zhang  45:16
+OK, OK.
+Yeah, yeah.
+
+Sagar Thacker  45:17
+We can, but it's a decision of the product where you want the customers to do it.
+
+Victor Zhang  45:25
+Call.
+
+Sagar Thacker  45:25
+Maxi.
+
+Maximiliano Cecilia  45:31
+Why? What are the next steps here?
+How what things you need to fix?
+
+Sagar Thacker  45:35
+Uh.
+I fix this queue and background jobs are giving me a big pain point.
+
+Maximiliano Cecilia  45:39
+Or to to continue working on.
+
+Sagar Thacker  45:47
+But that those are the two things I need to fix.
+Or like I'm testing and if I find a new issues so that is something I will have to fix.
+Then after this.
+The.
+How do I say?
+The images of the graph are the only piece remaining.
+And.
+The snowflake MCP, these four things, and then even if you anybody could anybody today were able to run it on their laptops.
+So you guys can even contribute or on that part for MCP or snowflakes, you guys can contribute?
+But those are the four things before.
+And for actual deployment I integration for APIs so that part.
+And any other things that you guys do for back?
+
+Maximiliano Cecilia  46:41
+Well that that part is is because you need to just pour that part from from.
+
+Sagar Thacker  46:46
+Yeah, that's easy.
+But those are the small things left for to an actual deployment and the workflows for it.
+
+Maximiliano Cecilia  46:47
+Yeah.
+OK.
+Yeah, yeah, I'm. I'm trying to think.
+When when do you think you need the help from front end and from?
+That helps. When do you think they you'll you'll need to start getting them involved and think on that.
+
+Sagar Thacker  47:08
+I wanted to involve front end early on. That's why even though it's not finished, I'm I'm like let's have the talk.
+I don't wait.
+My only.
+Like question Mark is for the architecture or like the system.
+How good the front end gets deployed and.
+Everything works together, but that is where I have.
+
+Maximiliano Cecilia  47:28
+Yeah.
+
+Sagar Thacker  47:35
+For data OPS.
+Data works on sequel analyst, right?
+
+Maximiliano Cecilia  47:43
+Yeah.
+
+Sagar Thacker  47:43
+1st So Snowflake MCP whenever they have some time to explore Snowflake, MCP and authentication for that.
+And then from from your point of view MCP server for for example, SCOPE 3. If you want to look at scope three data or whatever.
+So what are the authentications required for that?
+And then we can create clients.
+In your, I'll figure out the client PCR and then we can connect.
+
+Maximiliano Cecilia  48:17
+For.
+Compliance.
+Are you going to use Bono directly or you also need an NCP for compliance?
+
+Sagar Thacker  48:28
+MCP for compliance where I'm I have a spike for RAM to figure out since it's a workflow, right?
+You trigger and does the job.
+
+Maximiliano Cecilia  48:39
+Yeah.
+
+Sagar Thacker  48:41
+I don't think that's a good for agent like give it a question so.
+
+Maximiliano Cecilia  48:45
+Yeah.
+
+Sagar Thacker  48:48
+I've asked him to do a spike on rag architectures for specifically agents and what can you. You can have that workflow if you want to.
+For bulk, because bulk run, I don't see a way to have agents for bulkins.
+
+Maximiliano Cecilia  49:01
+No, no. Yeah, doesn't make sense.
+
+Sagar Thacker  49:04
+Then or else we can build a agent. Here we can have MCP for compliance and bring those pieces from that workflow.
+What we learned for bring it here.
+And that what I also want to do is MCP can also have.
+Resources. For example, your back end Snowflake schema.
+Can be in the MCP.
+As a resource which you can pull so the compliance power framework knowledge or like AP is the things to look for.
+Everything can be an MCP you get, you pull it up, pull it from there and you can do it.
+So how do I structure Proms and that part is the only question mark I have from an agent point of view. Everything will be in MCP.
+Then I'll contribute to an MCP as well eventually.
+
+Maximiliano Cecilia  49:59
+Great.
+
+Sagar Thacker  49:59
+And the only part maxi in future, I don't know if you have.
+The pricing for this is a question mark for me.
+
+Maximiliano Cecilia  50:13
+We are using the sandboxes right?
+
+Sagar Thacker  50:16
+Yes, the it's not expensive.
+
+Maximiliano Cecilia  50:19
+So.
+
+Sagar Thacker  50:19
+We can no, but eventually it's an agent, so you'll people will consume more tokens and some guard rails. We will add, we'll have to add guard rails for they don't use it as a replacement for chargeG or cloud.
+
+Maximiliano Cecilia  50:24
+Yeah.
+Yeah. Or or you can do and sleep 180 like if.
+
+Sagar Thacker  50:36
+Thank.
+Yeah. No, that's actually it does a good job. When I did a when I told you to run that I I told it to create a $300 million, three, 100 million rows Excel file.
+It actually did create and it would go and sleep and check and pull and it will do it on its own.
+
+Maximiliano Cecilia  50:53
+Yeah.
+
+Sagar Thacker  50:57
+So so but it created.
+
+Maximiliano Cecilia  50:57
+Oh, OK, my dear.
+We we need to Add all those.
+Word rates and save checks.
+Are we tracking?
+We need to also start tracking.
+
+Sagar Thacker  51:09
+So langfuse from day one it has langfuse in it.
+
+Maximiliano Cecilia  51:11
+Tokens.
+
+Sagar Thacker  51:13
+So it's on local right now, but you can turn up Lancers on a local when you're running.
+Don't use have been cautioned so not to use lancies the cloud environment for development because they charge you per.
+Thing that get dragged request, so I've left it for.
+
+Maximiliano Cecilia  51:32
+The best, yeah.
+
+Sagar Thacker  51:37
+Prod, prod only and then you can spin up a local Lang fuse.
+The meeting API keys and you can use it.
+
+Maximiliano Cecilia  51:43
+And we are and we're tracking tokens per tenant direct.
+
+Sagar Thacker  51:47
+You can track it so it's all metadata, but whichever metadata is there, we can create dashboards for per I've I have.
+
+Maximiliano Cecilia  51:50
+Yeah.
+
+Sagar Thacker  51:57
+I can quickly.
+Show you.
+Guys can see it.
+So for example it it is per dashboards.
+Refuse.
+You can do it per.
+Service product or something you can.
+
+Rohit Kumar  52:29
+Alright, it is past 30 minutes.
+So you can if you can change it to past one month so it will show more of data.
+
+Sagar Thacker  52:33
+Oh.
+The applicant seat per customer. You can see it also per service as well. So like gap assessment compliance, climate risk.
+EF matching. You can search it.
+I've not done it as a user level because we don't have that concept.
+I don't have that concept sending.
+Not send the user ID, so I cannot track that, but I'm tracking at a tenant level and at a service level.
+So you can get with service which customer.
+And everything on those.
+That's it.
+And we'll add, this will be added to.
+Dogs and that can be user level 2.
+Hello.
+
+Maximiliano Cecilia  53:26
+Yeah. Nice.
+Yeah. With these, I mean we we already did the exercise of more or less how much we into.
+
+Sagar Thacker  53:28
+And.
+
+Maximiliano Cecilia  53:37
+To charge, so we have that.
+
+Sagar Thacker  53:39
+OK.
+
+Maximiliano Cecilia  53:39
+As an umbrella, we'll need to track, especially at the beginning, the first few months to see how far we're from the from the mark.
+
+Sagar Thacker  53:48
+It's good, but yes.
+
+Franco Grazio  53:49
+Just curious, do you have any ballpark estimations?
+
+Sagar Thacker  53:53
+Across.
+
+Maximiliano Cecilia  53:53
+For for gust.
+
+Franco Grazio  53:54
+Yeah, of course per tenant.
+
+Maximiliano Cecilia  53:58
+Yes, I have a chat.
+I know if I'm going to be able to find it now, but.
+
+Sagar Thacker  54:11
+Based on what I know, like based on the cost that I have tracked for workflows, not for agents, it doesn't cost for like it went around.
+137 and it includes Dev and everything. If I go and just. I'm just tracking for Rohit, we're tracking since month two months.
+
+Rohit Kumar  54:35
+I think 2 months.
+
+Sagar Thacker  54:37
+So last 90 days, $600.
+Of.
+So I'm assuming you can multiply it by five or three.
+To get a ballpark.
+
+Maximiliano Cecilia  54:51
+Sorry $600.00 the last two months.
+
+Sagar Thacker  54:55
+I don't know how many months.
+
+Rohit Kumar  54:55
+Add 2 or 2 1/2 months maybe.
+
+Maximiliano Cecilia  54:57
+But doing development so.
+
+Sagar Thacker  54:59
+I don't.
+Layer every every platform proding Moscow staging all.
+
+Rohit Kumar  55:08
+But just for compliance.
+
+Maximiliano Cecilia  55:09
+Yeah.
+
+Sagar Thacker  55:11
+I can filter for.
+534.
+543.
+
+Maximiliano Cecilia  55:23
+Yeah, but that's only prod, right?
+
+Sagar Thacker  55:25
+This is only prod, prod.
+
+Maximiliano Cecilia  55:26
+So so it doesn't include.
+
+Sagar Thacker  55:30
+Tracy, no.
+Tracy. No. But Tracy.
+
+Rohit Kumar  55:31
+This is just for compliance I think.
+
+Sagar Thacker  55:32
+Tracy, what I've done it for.
+
+Maximiliano Cecilia  55:34
+Yeah.
+
+Sagar Thacker  55:34
+No, this is no. This is for all.
+This is for all.
+This should be for all.
+
+Rohit Kumar  55:42
+Yeah, I think this is just for compliance.
+
+Maximiliano Cecilia  55:46
+I don't remember which ones are actually linked, it's.
+
+Rohit Kumar  55:48
+Because if you go to scope three or something else, it will show different value most probably.
+
+Sagar Thacker  55:51
+Uh-huh.
+Alright, $500.00 for compliance.
+
+Rohit Kumar  55:57
+Yeah.
+Yeah.
+
+Sagar Thacker  56:07
+$300.00 for SCOPE 3.
+And then Subaru should be less.
+
+Rohit Kumar  56:11
+Should be sending it to you.
+
+Maximiliano Cecilia  56:12
+OK.
+
+Rohit Kumar  56:12
+OK, that's fine.
+
+Maximiliano Cecilia  56:14
+Yeah.
+
+Rohit Kumar  56:14
+Yeah, supplier Portal was updated late so.
+
+Maximiliano Cecilia  56:19
+Yeah, we, we already run most of it.
+
+Sagar Thacker  56:19
+$1000 for me.
+Maria.
+And also the tracks which model we are using.
+At a model level.
+Naved.
+
+Maximiliano Cecilia  56:42
+For Tracy, Assistant, we were guessing 3K per year Franco.
+There was a boy park that we had.
+
+Franco Grazio  56:51
+All right.
+
+Maximiliano Cecilia  56:55
+Umm.
+
+Sagar Thacker  56:57
+But we can ask since after we'll get usage level metadata, we can change it to use level pricing as well if.
+
+Maximiliano Cecilia  57:01
+Yeah.
+Well, that that well, that's the lot of clients won't.
+They will try to pay a flat rate and not go to.
+Start talking.
+
+Sagar Thacker  57:13
+Sure.
+
+Maximiliano Cecilia  57:16
+But that's the number we have and it's hard to track, right because it's actually going to depend on how crazy you are with the dashboard, how long, how big your your file is.
+A lot of things right?
+
+Franco Grazio  57:31
+Yeah.
+
+Sagar Thacker  57:32
+But yes.
+
+Maximiliano Cecilia  57:33
+Well, this is great Sagar.
+And.
+
+Sagar Thacker  57:38
+Thank you. I shared the Nepal.
+
+Franco Grazio  57:39
+Yep.
+
+Maximiliano Cecilia  57:40
+A lot.
+A lot faster than I was expecting, actually.
+
+Sagar Thacker  57:43
+Really.
+
+Maximiliano Cecilia  57:43
+That's nice.
+Yep, I I I. So I thought he was going to start Sri Lanka.
+
+Sagar Thacker  57:51
+They're almost end, of course, first of month and costs for I'm like I'm behind.
+Glad to hear that I shared the report.
+
+Rohit Kumar  58:02
+This song.
+
+Sagar Thacker  58:03
+I'll share the next steps. What I need from front end data OPS and back end.
+
+Rohit Kumar  58:04
+That's.
+Been loving it, yes.
+
+Sagar Thacker  58:11
+And that we can take over if you want me to join planning for any of these sessions or if you want to join the MLS planning, I'm happy to.
+That's it.
+
+Maximiliano Cecilia  58:24
+Juan, do me a favor.
+Let's create 1 ticket in Databs for start looking at MCP.
+And to actually spend time looking at the Tracey secret keys, I have some idea.
+We have to fix the way we're getting those because I'm pretty sure I run the GPG commands locally, create everything and upload everything to Snowflake.
+
+Juan Vergara  58:52
+Yeah, I think now we are using some that we created locally and some that are in AWS.
+
+Sagar Thacker  58:58
+I was thinking to.
+
+Maximiliano Cecilia  58:58
+But but, but even the ones that are in the race, I think I cleared them locally and upload them to interest.
+
+Juan Vergara  58:59
+Not.
+
+Maximiliano Cecilia  59:04
+We don't have any anywhere in the pipeline where we actually create the see.
+
+Juan Vergara  59:10
+Yeah. Yeah. OK.
+
+Sagar Thacker  59:11
+Usually, how do you automate it?
+Do you put it in GitHub secrets and then through CLI you update AWS right now?
+What we do is if you we can dynamically create secrets based on the Jason through CI but the value it has to be manually replaced.
+That's it.
+But the secrets based on the structure are automatically created.
+
+Maximiliano Cecilia  59:38
+Yeah, but but the secret, the container, not the value.
+
+Sagar Thacker  59:41
+Container areas container is automatically created.
+
+Maximiliano Cecilia  59:43
+Yeah, the container for sure.
+The the things that for the value to actually get the private and public.
+You need to run GPG to do it.
+So where do you run that?
+
+Sagar Thacker  59:59
+Good.
+
+Maximiliano Cecilia  59:59
+Because. Because what?
+I'm sure what I did was actually run in GPG on my local, getting the private and uploading that private to snowflake with a with a query.
+With a SQL query.
+
+Sagar Thacker  1:00:13
+Can't we create a service for like maintaining secrets or API keys?
+Like Postgres can have or the expiry date reminders.
+
+Maximiliano Cecilia  1:00:31
+I. No, I'm. I'm pretty sure terror from pass something to it.
+
+Sagar Thacker  1:00:36
+Oh.
+
+Maximiliano Cecilia  1:00:37
+I'm pretty sure you can actually do that.
+You can actually run it in Terraform, Terraform then.
+So everything Snowflake are you? Don't ever see the bribe, right?
+And you because that way you can actually run the rotation.
+Otherwise you need to manually rotate things.
+
+Sagar Thacker  1:00:54
+Mm-.
+
+Maximiliano Cecilia  1:00:54
+But that's a that's a part I need to figure out.
+
+Sagar Thacker  1:00:57
+Cool.
+The the that is 1 ticket is blocked for me for that reason, but we're good for now.
+Deployment and.
+
+Maximiliano Cecilia  1:01:10
+OK.
+I I will get it.
+
+Sagar Thacker  1:01:12
+Arvind.
+That's it.
+Thank you everyone.
+
+Maximiliano Cecilia  1:01:22
+Thanks again.
+
+Juan Vergara  1:01:22
+Happy birthday.
+
+Franco Grazio  1:01:23
+That was great. Thank you Sagar.
+
+Victor Zhang  1:01:24
+Thank you Sagar.
+
+Sagar Thacker  1:01:25
+Oh, thank you. Bye bye, bye.
+
+Rohit Kumar  1:01:27
+Thank you.
+
+Maximiliano Cecilia  1:01:27
+Right.
