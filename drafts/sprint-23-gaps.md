@@ -1,7 +1,7 @@
 # Sprint 23 — Draft tickets (Q4 gaps)
 
 **Sprint:** Sprint 23 (id 5841), Nov 23 – Dec 7, 2026. Brian said on 2026-11-20 to target Sprint 23 for now. Tickets blocked on other work (H2→R1, S1→S2, R3) can carry over. The **⇡ S23** marks are left over from when these were Sprint 24 candidates.
-**Status:** created 2026-11-20: H2 = ML-809, H3 = ML-810, S1 = ML-811, S2 = ML-816. The rest are drafts.
+**Status:** all created in Sprint 23 on 2026-11-20, to be polished in sprint planning: H1 = ML-821, H2 = ML-809, H3 = ML-810, R1 = ML-822, R2 = ML-825, R3 = ML-823, S1 = ML-811, S2 = ML-816.
 **Source:** gaps found in `projects/harness/roadmap.md` (meeting next steps with no ticket) and `plans/q4-2026-ml-roadmap.md` (Q4 roadmap rows with no ML ticket).
 
 Legend: ✅ approve as-is · ✏️ edit · ❌ drop
@@ -12,7 +12,7 @@ Legend: ✅ approve as-is · ✏️ edit · ❌ drop
 
 These come before the roadmap items, because the Compliance chat (R1) and Traci in Insights (R3) need a deployed harness. Order: H1 → H2 / H3 in parallel → R1.
 
-### H1. [harness] Make queued messages and background-job wake-ups reliable ⇡ S23
+### H1. ✅ **CREATED ML-821** — [harness] Make queued messages and background-job wake-ups reliable ⇡ S23
 - **Type:** Story · **Labels:** `Platform`, `enhancement` · **Assignee:** Sagar Thacker
 - **Follows:** ML-789, which is Closed, but its "Still open" question was never answered. In the harness overview meeting Sagar called queuing and background jobs "a big pain point" and his first two fixes before a deployment.
 - ✏️ Sagar to add the specific bugs he's seen. Split into two tickets if they're unrelated.
@@ -91,7 +91,7 @@ A front-end app authenticates against the harness the same way it does against m
 
 ## R. Q4 roadmap rows with no ML ticket
 
-### R1. [harness][Complyrag] Compliance chat to refine AI answers (Phase 1)
+### R1. ✅ **CREATED ML-822** — [harness][Complyrag] Compliance chat to refine AI answers (Phase 1)
 - **Type:** Story · **Labels:** `Compliance`, `enhancement` · **Assignee:** Ram Gandikota (confirmed 2026-11-20), with Sagar Thacker supporting on the harness side
 - **Roadmap:** "AI chat to refine answers": Must Have, size L, not started. Customer: Hirschmann Auto, who offered to help.
 - **Blocked by:** the UX decision (below), H2 and H3. It also depends on what ML-788 recommends.
@@ -126,7 +126,7 @@ From a compliance question, a user can chat with a harness agent to refine the A
 
 ---
 
-### R2. [Abbyy] Migrate Barnes Industrial to the Abbyy IWG tenant
+### R2. ✅ **CREATED ML-825** — [Abbyy] Migrate Barnes Industrial to the Abbyy IWG tenant
 - **Type:** Story · **Labels:** `Site_Based`, `enhancement` · **Assignee:** Chethan Patharla
 - **Roadmap:** "Migrate Barnes Industrial to New Abbyy Process": Must Have, size M, **In progress** in Notion.
 - ✏️ Chethan isn't in `TICKET_CONVENTIONS.md`. Check whether work is already tracked elsewhere, e.g. under epic ML-342 Abbyy 2.0. Look up Chethan's account ID before creating. The details below are a placeholder until Chethan fills them in.
@@ -146,7 +146,7 @@ From a compliance question, a user can chat with a harness agent to refine the A
 
 ---
 
-### R3. [harness][Traci] Traci in Insights over Scope 1, 2 and 3 data
+### R3. ✅ **CREATED ML-823** — [harness][Traci] Traci in Insights over Scope 1, 2 and 3 data
 - **Type:** Story · **Labels:** `Platform`, `Scope3`, `Site_Based`, `enhancement` · **Assignee:** Sagar Thacker
 - **Roadmap:** "Updated Traci in Insights – connected to scopes 1, 2 and 3 data": **Should Have**, not started, Notion page blank. Realistically a Sprint 25 / Q1 candidate.
 - **Blocked by:** ML-791 (Snowflake MCP), ML-792 (SQL Analyst on the harness), H2 and H3. Also the Data Ops Snowflake MCP auth ticket that Maxi asked Juan for, which is outside ML.

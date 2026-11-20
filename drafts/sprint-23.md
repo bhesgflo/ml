@@ -1,7 +1,7 @@
 # Sprint 23 — Draft tickets
 
 **Sprint:** Sprint 23 (id 5841), Nov 23 – Dec 7, 2026
-**Status:** A2–A6 created in Sprint 23 on 2026-11-17 (ML-800 – ML-804). A1a/A1b (LCA, rewritten for the harness), A7 are still drafts. A8/A9/A10 were created on 2026-11-20 as ML-807/ML-808/ML-812. More Sprint 23 drafts are in `drafts/sprint-23-gaps.md`.
+**Status:** all section A drafts are created in Sprint 23. A2–A6 = ML-800–804 (2026-11-17). A8 = ML-807, A9 = ML-808, A10 = ML-812, A1a = ML-818, A7 = ML-819, A11 = ML-820, A1b = ML-824 (2026-11-20), to be polished in sprint planning. More are in `drafts/sprint-23-gaps.md`.
 **Source:** follow-ups found in Sprint 21/22 tickets: "out of scope" and "follow-up" notes, spike outcomes, and blocked work.
 
 Legend: ✅ approve as-is · ✏️ edit · ❌ drop
@@ -10,7 +10,7 @@ Legend: ✅ approve as-is · ✏️ edit · ❌ drop
 
 ## A. Ready to draft now
 
-### A1a. [harness][LCA] Set up the LCA agent on the harness
+### A1a. ✅ **CREATED ML-818** — [harness][LCA] Set up the LCA agent on the harness
 - **Type:** Story · **Labels:** `Platform`, `Supplier_Portal`, `enhancement` · **Assignee:** Rohit Kumar (moved from Victor 2026-11-20; Sagar supports on the harness side)
 - **Follows:** ML-640 (deepagents skeleton in mountain-gorilla, REVIEW since Sprint 20), epic ML-639. **Decision (2026-11-17):** LCA is built on the harness, not on the ML-640 skeleton.
 
@@ -38,7 +38,7 @@ LCA is defined as a harness agent (`agents/lca/` with `agent.yaml` and prompts),
 
 ---
 
-### A1b. [LCA] Stage 1: BOM column mapping, validation and vision extraction
+### A1b. ✅ **CREATED ML-824** — [LCA] Stage 1: BOM column mapping, validation and vision extraction
 - **Type:** Story · **Labels:** `Supplier_Portal`, `enhancement` · **Assignee:** Rohit Kumar (moved from Victor 2026-11-20)
 - **Blocked by:** A1a, and A9 (ML-808). ✏️ Rewrite this ticket with ML-808's chosen approach and schema before creating it. It's planned for Sprint 24.
 
@@ -156,7 +156,7 @@ The harness, and any engine it still uses, answers every unanswered tool call in
 
 ---
 
-### A7. [pptxgen] Add removal workflows for temporary stages
+### A7. ✅ **CREATED ML-819** — [pptxgen] Add removal workflows for temporary stages
 - **Type:** Story · **Labels:** `Site_Based`, `chore` · **Assignee:** Ram Gandikota
 - **Follows:** ML-747, which listed `pptxgen.remove.*` as an optional follow-up. Lower priority, so a good candidate to defer.
 
@@ -255,6 +255,31 @@ The harness, and any engine it still uses, answers every unanswered tool call in
 * A recommended option, with a sketch of the contract and a data-flow diagram.
 * A sequence of follow-up tickets, each tied to the harness milestone it needs: local, wip (ML-809), auth (ML-810), Snowflake MCP (ML-791).
 * Agreement with Rohit on the Bonobo side.
+
+**Timebox:** 3 days.
+
+---
+
+### A11. ✅ **CREATED ML-820** — [Complyrag][SPIKE] Document tagging: where tags fail to drive retrieval
+- **Type:** Story · **Labels:** `Compliance`, `research` · **Assignee:** Ram Gandikota
+- **Context:** Brian's notes: "continued improvements in Document Tagging" for Ram. The reference case is **ML-795** (Lear). ✏️ Reassign ML-795 from Sagar to Ram; my attempt was blocked by a permission check. Related: ML-786 (fiscal-year tag filtering spike), ML-788 (RAG architecture spike), and the Q4 row "Fiscal-year aware AI documents".
+
+**Goal:** Find out why tagged documents are missed by retrieval, and decide what tagging improvements to make next.
+
+**Context:** Users tag each document they upload. At ingestion the tag is stored as metadata in the Bedrock knowledge base / OpenSearch behind Bonobo, and retrieval can filter on it. In ML-795, Lear's EHS&S policy is trained and tagged for all relevant topics. The AI ignores it for the CSRD water questions, but cites it for pollution and says there that it covers water.
+
+**Questions to answer:**
+* **The Lear case:** why is the policy retrieved for pollution but not for water? Is it the tag filter, the chunking, the query, the ranking, or the tag not being applied in that question's flow?
+* **How do tags drive retrieval today**: as a hard filter, a boost, or not at all? Is this consistent across Gap Assessment, AI Summary and Suggested Responses?
+* How are **untagged, multi-tagged and pre-tagging (legacy) documents** handled? Check with ML-786 so the work isn't repeated.
+* Are the **topic tags** themselves good enough (taxonomy, granularity, consistency between customers)?
+* Should the AI **suggest tags at upload**, so users don't tag everything by hand?
+* Do legacy documents need a **backfill**?
+
+**Outcome:**
+* The root cause for ML-795, with a fix ticket.
+* A short write-up on how tags drive retrieval today and where it fails.
+* Prioritized follow-up tickets for the tagging improvements: retrieval use of tags, legacy backfill, and AI-suggested tags.
 
 **Timebox:** 3 days.
 

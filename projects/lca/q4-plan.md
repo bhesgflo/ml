@@ -34,9 +34,14 @@ Q4 has **two working sprints left**. Sprint 25 covers the holidays, so plan to f
 5. **ML-640.** It's been in REVIEW since Sprint 20. Close it, or merge only its non-LCA fixes (Sprint 23 draft, item C1).
 6. **Rohit's load.** In Sprint 23 he also has ML-801, ML-802 and the Axolotl docs (ML-796–799). The two spikes total about 7 days, so something may have to move.
 
+## Reference: the manual EnerSys Phase 1 method
+
+[`reference/enersys-document-ingest-process.md`](reference/enersys-document-ingest-process.md) summarizes the Notion page "Document Ingest Process". It covers the stage-by-stage manual LCA of the 48V 4PzS500 battery at Bielsko: functional unit, BOM materials, energy, waste, transport, packaging, JRC end of life, mass balance and DQR. **This is the process the POC automates.** Brian, 2026-11-20: ML-807/ML-808 stay as they are; this feeds a **Sprint 24 research project**.
+
 ## Rough Sprint 24 tickets (draft properly after the checkpoint)
 
 * [LCA] Ingest Enersys BOMs into the product-tree schema (A1b, rewritten)
 * [LCA] Match materials and parts to emission factors
 * [LCA] Calculate the footprint per functional unit, with a breakdown by component and stage
 * [LCA] Data-gap and traceability report for the POC output
+* [LCA][SPIKE] Research: map the manual Phase 1 method to automation. For each stage: what to extract, calculate or ask the client for, and the audit evidence (TeR/GeR, primary/secondary) per line. Includes the inconsistencies listed in the reference.
